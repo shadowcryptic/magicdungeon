@@ -1,0 +1,17 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "games": {
+      "$room": {
+        ".read": "$room.matches(/^[a-z0-9]{4,24}$/)",
+        ".write": "$room.matches(/^[a-z0-9]{4,24}$/)",
+        ".validate": "newData.hasChildren(['json', 'v']) && newData.child('json').isString() && newData.child('json').val().length < 200000 && newData.child('v').isNumber()",
+        "json": { ".validate": true },
+        "v": { ".validate": true },
+        "updated": { ".validate": "newData.isNumber()" },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}

@@ -82,7 +82,7 @@ h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance;l
 .card.img .ptb{position:absolute;right:-6px;bottom:-6px;font-family:var(--display);font-weight:800;font-size:20px;background:var(--stone);color:var(--torch);border:2px solid var(--torch);border-radius:6px;padding:0 7px;line-height:1.25}
 .card.img.tapped{transform:rotate(9deg) scale(.94)}
 .card.img.stacked{box-shadow:5px 5px 0 -1px #2a2d38,5px 5px 0 0 var(--line)}
-.spot .big .card.img{min-height:0;padding:0;width:min(380px,80vw,52vh)}
+.spot .big .card.img{min-height:0;padding:0;width:min(80vw,58vh)}
 .spot .big:has(.card.img){width:auto}
 .spot .big .card.img .ptb{font-size:34px}
 .credit{font-size:11px;color:var(--dim)}
@@ -95,7 +95,7 @@ h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance;l
 .join .inp{text-transform:lowercase}
 
 /* ---------- Display ---------- */
-.disp{height:100%;display:grid;grid-template-columns:minmax(260px,320px) 1fr;grid-template-rows:auto 1fr;gap:16px;padding-block:14px}
+.disp{--z:1;height:100%;display:grid;grid-template-columns:calc(300px * var(--z)) 1fr;grid-template-rows:auto 1fr;gap:16px;padding-block:14px}
 .dtop{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px}
 .dtop h1{font-size:clamp(26px,3vw,40px);font-weight:800}
 .dtop .lvname{color:var(--lvc,var(--torch))}
@@ -121,7 +121,15 @@ h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance;l
 .field{min-height:0;overflow:auto;display:flex;flex-direction:column;gap:12px}
 .fieldhead{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
 .fieldhead h2{font-size:26px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;align-content:start;padding:4px 6px 12px 0}
+.grid{--cw:200px;display:grid;grid-template-columns:repeat(auto-fill,var(--cw));gap:18px;align-content:start;justify-content:start;padding:10px 10px 14px 8px}
+.grid .card{width:var(--cw);aspect-ratio:63/88;min-height:0}
+.grid .card:not(.img) .nm{font-size:calc(var(--cw) * .1)}
+.grid .card:not(.img) .ty,.grid .card:not(.img) .note{font-size:calc(var(--cw) * .065)}
+.grid .card:not(.img) .pt,.grid .card:not(.img) .cnt{font-size:calc(var(--cw) * .13)}
+.grid .card:not(.img) .sig{width:calc(var(--cw) * .13);height:calc(var(--cw) * .13)}
+.grid .card.img .cntb,.grid .card.img .ptb{font-size:max(20px, calc(var(--cw) * .11))}
+.grid .card.img .tag{font-size:max(10px, calc(var(--cw) * .05))}
+.dtop,.side,.fieldhead{zoom:var(--z)}
 .empty{border:1px dashed var(--line);border-radius:10px;padding:40px;text-align:center;color:var(--dim)}
 .wavestrip{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .wchip{font-size:12.5px;border-left:3px solid var(--tc);background:var(--slab2);padding:2px 7px;border-radius:3px}
@@ -141,7 +149,7 @@ h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance;l
 .spot .big .card .note{font-size:17px}
 .spot .big .card .sig{width:38px;height:38px}
 .spot .big .card .pt{font-size:40px}
-.spot .stripbig{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;width:min(1100px,92vw)}
+.spot .stripbig{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(140px,11vw,320px),1fr));gap:12px;width:92vw;max-height:72vh;overflow:auto}
 .spot .hit{font-family:var(--display);font-weight:800;font-size:clamp(120px,18vw,240px);line-height:.9;color:var(--blood);animation:rise .4s ease-out}
 .spot .ends{font-size:20px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blood)}
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -718,7 +726,10 @@ function setupForm(fresh){
 }
 function setupTab(){
   const all=[...new Set(DECKS.flatMap(d=>d.list.map(x=>x[0])))];
-  return `<div class="sec"><h3>Game tuning</h3>
+  return `<div class="sec"><h3>Table display</h3>
+    <div class="g3">${Object.entries(SIZES).map(([k,l])=>`<button class="btn ${(S.size||"fit")===k?"on":""}" data-a="size" data-s="${k}">${l}</button>`).join("")}</div>
+    <p class="hint">Fit to screen makes cards as big as possible while showing the whole battlefield. Large and Huge use fixed sizes and scroll when the board fills up.</p></div>
+  <div class="sec"><h3>Game tuning</h3>
     <div class="row"><span style="flex:1">Horde buff (all creatures)</span><div class="stepper"><button data-a="buff" data-d="-1" aria-label="Less">−</button><input class="num" id="buffv" value="+${S.buff}" readonly aria-label="Buff"><button data-a="buff" data-d="1" aria-label="More">+</button></div></div>
     <div class="row"><span style="flex:1">Poison counters</span><div class="stepper"><button data-a="psn" data-d="-1" aria-label="Less">−</button><input class="num" id="psnv" value="${S.poison}" readonly aria-label="Poison"><button data-a="psn" data-d="1" aria-label="More">+</button></div></div>
     <div class="row"><span style="flex:1">Survivors</span><div class="stepper"><button data-a="pl" data-d="-1" aria-label="Fewer">−</button><input class="num" id="plv" value="${S.players}" readonly aria-label="Players"><button data-a="pl" data-d="1" aria-label="More">+</button></div></div>
@@ -735,6 +746,23 @@ function setupTab(){
 }
 
 /* ================= RENDER ROOT ================= */
+/* Display sizing: scale chrome with the screen, and size cards to fill the battlefield */
+const SIZES={fit:"Fit to screen",large:"Large",huge:"Huge"};
+function fitDisplay(){
+  const d=document.querySelector(".disp");if(!d)return;
+  const z=Math.min(2.4,Math.max(1,window.innerWidth/1400));d.style.setProperty("--z",z.toFixed(3));
+  const g=document.querySelector(".field .grid"),f=document.querySelector(".field");if(!g||!f)return;
+  const mode=(S&&S.size)||"fit";
+  if(mode==="large"){g.style.setProperty("--cw",Math.round(280*z)+"px");return}
+  if(mode==="huge"){g.style.setProperty("--cw",Math.round(380*z)+"px");return}
+  const n=g.children.length;if(!n)return;
+  const gap=18,W=g.clientWidth-20,H=f.clientHeight-(g.offsetTop-f.offsetTop)-28;
+  let best=0;
+  for(let cols=1;cols<=n;cols++){const rows=Math.ceil(n/cols);const w=Math.min((W-gap*(cols-1))/cols,((H-gap*(rows-1))/rows)*63/88);if(w>best)best=w}
+  best=Math.max(130,Math.min(best,520*z));
+  g.style.setProperty("--cw",Math.floor(best)+"px");
+}
+window.addEventListener("resize",()=>{if(ui.mode==="display")fitDisplay()});
 function render(){
   if(S&&S.spot&&S.spot.id!==ui.lastSpot){const first=ui.lastSpot===null&&!ui.seenOnce;ui.lastSpot=S.spot.id;if(!first&&ui.mode==="display"){ui.spotOn=true;clearTimeout(ui.spotT);ui.spotT=setTimeout(()=>{ui.spotOn=false;render()},S.spot.kind==="wave"?6500:4200)}}
   if(S)ui.seenOnce=true;
@@ -743,6 +771,7 @@ function render(){
   app.innerHTML=(hasFirebase&&!ROOM)?renderLanding():ui.mode==="display"?renderDisplay():ui.mode==="controller"?renderController():renderLanding();
   if(ui.mode==="controller")window.scrollTo(0,sy);
   fillQRs();
+  if(ui.mode==="display")fitDisplay();
 }
 
 /* ================= EVENTS ================= */
@@ -779,6 +808,7 @@ const A={
   clearAtk:()=>commit(S=>{S.board.forEach(b=>{b.a=false;b.bl=false});S.atk=false}),
   shuffle:()=>commit(S=>{shuffle(S.libs[S.level]);log(S,`${DECKS[S.level].tag} library shuffled`)}),
   peek:()=>{ui.peek=!ui.peek;render()},
+  size:d=>commit(S=>{S.size=d.s}),
   buff:d=>commit(S=>{S.buff=Math.max(0,(S.buff||0)+(+d.d))}),
   psn:d=>commit(S=>{S.poison=Math.max(0,S.poison+(+d.d))}),
   pl:d=>commit(S=>{S.players=Math.min(4,Math.max(1,S.players+(+d.d)))}),
@@ -787,7 +817,7 @@ const A={
   newgame:()=>{
     if(S&&!ui.confirmNew){ui.confirmNew=true;render();return}
     const ov=S?S.ov:{},pt=S?S.pt:{};
-    const ns=newState(ui.setup.players,ui.setup.start,ui.setup.plan,S?S.v:0);ns.ov=ov||{};ns.pt=pt||{};
+    const ns=newState(ui.setup.players,ui.setup.start,ui.setup.plan,S?S.v:0);ns.ov=ov||{};ns.pt=pt||{};ns.size=S?S.size:undefined;
     hist=[];ui.confirmNew=false;ui.tab="turn";ui.sel=null;S=ns;render();push();toast("New game started");
   },
   cancelNew:()=>{ui.confirmNew=false;render()},

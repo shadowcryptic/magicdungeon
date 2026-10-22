@@ -241,7 +241,7 @@ details.ov summary{cursor:pointer;font-weight:700;padding:6px 0}
 function C(n,t,tr,pt,ends,x){return Object.assign({n,t,tr,pt,ends},x||{})}
 const CARDS={
   // Level 1 – Oozes
-  ooze:C("Ooze // Treasure","token","ooze","2/2",false,{note:"Dies: create two 1/1 Oozes",tq:'t:token !"Ooze" pow=2 tou=2'}),
+  ooze:C("Ooze // Treasure","token","ooze","2/2",false,{note:"Dies: create two 1/1 Oozes",tq:'t:token !"Ooze" pow=2 tou=2',sf:"tpca/17"}),
   expooze:C("Expanding Ooze","common","ooze","",false),
   baleful:C("Baleful Beholder","common","beholder","",false),
   acidic:C("Acidic Slime","creature","ooze","2/2",true),
@@ -353,7 +353,7 @@ function basePT(S,k){if(S.pt&&S.pt[k]!=null)return S.pt[k];const m=META[k];if(m&
 
 /* ================= SCRYFALL (card images, rarity, P/T) ================= */
 // Images load from Scryfall's CDN in the viewer's browser. Nothing is copied into this repo.
-const META={};const MKEY="dungeon-horde-scryfall-v1";
+const META={};const MKEY="dungeon-horde-scryfall-v2";
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const norm=s=>String(s).toLowerCase().replace(/[’‘]/g,"'").trim();
 function metaFrom(c){
@@ -377,7 +377,10 @@ async function loadMeta(){
       render();await sleep(120);
     }
     for(const k of Object.keys(CARDS).filter(k=>CARDS[k].tq)){
-      try{const r=await fetch("https://api.scryfall.com/cards/search?order=released&dir=desc&q="+encodeURIComponent(CARDS[k].tq),{headers:hdr});
+      try{
+        // A pinned printing (set/collector number) wins; otherwise search for the newest matching token
+        if(CARDS[k].sf){const r=await fetch("https://api.scryfall.com/cards/"+CARDS[k].sf,{headers:hdr});if(r.ok){META[k]=metaFrom(await r.json());await sleep(120);continue}}
+        const r=await fetch("https://api.scryfall.com/cards/search?order=released&dir=desc&q="+encodeURIComponent(CARDS[k].tq),{headers:hdr});
         if(r.ok){const j=await r.json();if(j.data&&j.data[0])META[k]=metaFrom(j.data[0])}}catch(e){}
       await sleep(120);
     }

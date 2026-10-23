@@ -14,7 +14,8 @@
   --ink:#ece5d3; --dim:#9b9686; --torch:#e9a23b; --torch-ink:#1b1306;
   --blood:#d4473b; --heal:#6dbb72;
   --t-ooze:#78b645; --t-goblin:#d0602f; --t-skeleton:#c9bfa8; --t-giant:#6eaad0;
-  --t-dragon:#d2423a; --t-beholder:#a074cc; --t-horror:#5f9a8c; --t-spell:#e0b04a; --t-ench:#c48fd6; --t-art:#a8a39a;
+  --t-dragon:#d2423a; --t-beholder:#a074cc; --t-horror:#5f9a8c;
+  --t-demon:#c23a52; --t-devil:#e0683a; --t-cleric:#e3d3a2; --t-cyber:#9fb6cc; --t-dalek:#c9a24a; --t-human:#e8cf7a; --t-titan:#5aa86b; --t-kraken:#3f8fd6; --t-vampire:#b0263f; --t-pw:#d9a441; --t-spell:#e0b04a; --t-ench:#c48fd6; --t-art:#a8a39a;
   --display:"Grenze", "Palatino Linotype", Georgia, serif;
   --body:"Alegreya Sans", "Segoe UI", system-ui, sans-serif;
   color-scheme:dark;
@@ -69,6 +70,8 @@ h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance;l
 .tr-ooze{--tc:var(--t-ooze)}.tr-goblin{--tc:var(--t-goblin)}.tr-skeleton{--tc:var(--t-skeleton)}.tr-giant{--tc:var(--t-giant)}
 .tr-dragon{--tc:var(--t-dragon)}.tr-beholder{--tc:var(--t-beholder)}.tr-horror{--tc:var(--t-horror)}.tr-spell{--tc:var(--t-spell)}
 .tr-ench{--tc:var(--t-ench)}.tr-art{--tc:var(--t-art)}
+.tr-demon{--tc:var(--t-demon)}.tr-devil{--tc:var(--t-devil)}.tr-cleric{--tc:var(--t-cleric)}.tr-cyber{--tc:var(--t-cyber)}.tr-dalek{--tc:var(--t-dalek)}
+.tr-human{--tc:var(--t-human)}.tr-titan{--tc:var(--t-titan)}.tr-kraken{--tc:var(--t-kraken)}.tr-vampire{--tc:var(--t-vampire)}.tr-pw{--tc:var(--t-pw)}
 
 /* Card with a Scryfall image: the full card, uncropped, with state badges laid over its edges */
 .card.img{padding:0;border:0;min-height:0;aspect-ratio:63/88;background:#000;border-radius:4.6%/3.3%;display:block}
@@ -178,7 +181,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .stepper{display:flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .stepper button{background:var(--slab2);border:0;width:44px;height:44px;font-size:20px;font-weight:700}
 .stepper input{width:56px;height:44px;text-align:center;background:var(--stone);border:0;color:var(--ink);font:inherit;font-weight:800;font-size:18px}
-.nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--slab);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--slab);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);
   padding:6px max(16px, env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-left,0px))}
 .nav button{background:none;border:0;padding:10px 4px;font-weight:700;color:var(--dim);border-radius:8px}
 .nav button.on{color:var(--torch);background:var(--slab2)}
@@ -212,6 +215,23 @@ label.f{display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--di
 .spotbar{display:flex;align-items:center;gap:10px;background:var(--torch);color:var(--torch-ink);border-radius:8px;padding:8px 8px 8px 12px;font-weight:700}
 .spotbar span{flex:1;min-width:0;font-size:14px;line-height:1.25}
 .spotbar .btn{background:var(--stone);color:var(--ink);border-color:var(--stone);min-height:40px;white-space:nowrap}
+.hordes{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.hpick{background:var(--slab);border:1px solid var(--line);border-left:5px solid var(--hc);border-radius:10px;padding:12px;text-align:left;display:flex;flex-direction:column;gap:3px}
+.hpick b{font-family:var(--display);font-size:20px;font-weight:700}
+.hpick span{font-size:13px;color:var(--dim)}
+.hpick.on{border-color:var(--torch);box-shadow:inset 0 0 0 1px var(--torch)}
+.rules{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.ban{max-width:1500px;margin:0 auto;padding-block:28px 40px;display:flex;flex-direction:column;gap:22px}
+.ban h1{font-size:clamp(34px,5vw,64px);font-weight:800;color:var(--blood)}
+.ban h2{font-size:26px}
+.ban .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(150px,13vw,260px),1fr));gap:14px}
+.ban .bcard{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink)}
+.ban .bcard img{width:100%;aspect-ratio:63/88;border-radius:4.6%/3.3%;display:block;background:#000;filter:grayscale(.35)}
+.ban .bcard .ph{aspect-ratio:63/88;border-radius:10px;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-family:var(--display);font-size:18px}
+.ban .bcard span{font-weight:700;font-size:14px}
+.combo{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-weight:700}
+.combo i{font-style:normal;color:var(--dim)}
+.tidebox{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(90px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--stone);padding:9px 14px;border-radius:8px;font-weight:700;z-index:30;max-width:90vw}
 details.ov summary{cursor:pointer;font-weight:700;padding:6px 0}
 .peek{display:flex;flex-direction:column;gap:4px;font-size:14px}
@@ -230,11 +250,13 @@ details.ov summary{cursor:pointer;font-weight:700;padding:6px 0}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="config.js"></script>
 <script>
-/* ================= CARD DATA (from hordemagic.com D&D Horde lists) ================= */
-// t: token | common | creature | legend | spell | ench | art.   ends: default "this card ends the wave" (uncommon+); editable in Setup.
+/* ================= CARD DATA (deck lists from hordemagic.com) ================= */
+// t: token | common | creature | legend | spell | ench | art | pw.   ends: fallback for "this card ends the wave" when Scryfall rarity is unknown.
+// Extra fields: tq (Scryfall token search, string or list tried in order), sf (pinned "set/number"), q (lookup name), face (1 = show back face),
+// gz (prefer Godzilla-series printing), ll (lifelink fallback), note (house rule shown on the card).
 function C(n,t,tr,pt,ends,x){return Object.assign({n,t,tr,pt,ends},x||{})}
 const CARDS={
-  // Level 1 – Oozes
+  // ---------- D&D Dungeon: Level 1 – Oozes
   ooze:C("Ooze // Treasure","token","ooze","2/2",false,{note:"Dies: create two 1/1 Oozes",tq:'t:token !"Ooze" pow=2 tou=2',sf:"tpca/17"}),
   expooze:C("Expanding Ooze","common","ooze","",false),
   baleful:C("Baleful Beholder","common","beholder","",false),
@@ -255,7 +277,7 @@ const CARDS={
   splitparty:C("Split the Party","spell","spell","",true),
   guttergrime:C("Gutter Grime","ench","ench","",true),
   marchooze:C("March of the World Ooze","ench","ench","",true),
-  // Level 2 – Goblins / Skeletons
+  // ---------- Level 2 – Goblins / Skeletons
   goblin:C("Goblin","token","goblin","1/1",false,{tq:'t:token !"Goblin" pow=1 tou=1'}),
   gobwiz:C("Goblin Wizard","token","goblin","",false,{tq:'t:token !"Goblin Wizard"'}),
   sting:C("Stingscourger","common","goblin","2/1",false),
@@ -268,7 +290,7 @@ const CARDS={
   ankle:C("Ankle Shanker","creature","goblin","",true),
   trash:C("Goblin Trashmaster","creature","goblin","",true),
   dtyrant:C("Death Tyrant","creature","beholder","",true,{note:"Post-combat: may return from graveyard"}),
-  gut:C("Gut, True-Soul Zealot","legend","goblin","",true,{note:"Attack trigger always sacrifices a Goblin token"}),
+  gut:C("Gut, True-Soul Zealot","legend","goblin","",true,{note:"Attack trigger always sacrifices a Goblin token",sf:"clb/180"}),
   bladewing:C("Bladewing, Deathless Tyrant","legend","dragon","6/6",true),
   krenko:C("Krenko, Mob Boss","legend","goblin","3/3",true,{noatk:true,note:"Never attacks. Taps to make Goblins"}),
   austere:C("Austere Command","spell","spell","",true),
@@ -278,11 +300,11 @@ const CARDS={
   grenade:C("Goblin Grenade","spell","spell","",false),
   trumpet:C("Trumpet Blast","spell","spell","",false),
   slag:C("Turn to Slag","spell","spell","",false),
-  wardrums:C("War Drums","ench","ench","",false),
+  wardrums:C("Goblin War Drums","ench","ench","",false,{sf:"a25/133"}),
   skelswarm:C("Skeletal Swarming","ench","ench","",true),
   rite:C("Rite of the Dragoncaller","ench","ench","",true),
   gruulchant:C("Gruul War Chant","ench","ench","",true),
-  // Level 3 – Giants / Dragons
+  // ---------- Level 3 – Giants / Dragons
   giantwiz:C("Giant Wizard","token","giant","",false,{tq:'t:token !"Giant Wizard"'}),
   rime:C("Rimeshield Frost Giant","common","giant","4/5",false),
   benthic:C("Benthic Giant","common","giant","4/5",false),
@@ -312,12 +334,182 @@ const CARDS={
   dragon5:C("Dragon","token","dragon","5/5",false,{note:"Flying",tq:'t:token !"Dragon" pow=5 tou=5'}),
   treasure:C("Treasure","token","art","",false,{tq:'t:token !"Treasure"'})
 };
-const DECKS=[
-  {name:"Oozes",tag:"Level 1",col:"var(--t-ooze)",list:[["ooze",38],["expooze",18],["baleful",2],["acidic",6],["biogenic",1],["gcube",13],["ravslime",1],["predooze",1],["sludge",2],["uchuulon",1],["aeve",1],["slurrk",1],["armshadar",1],["creepren",1],["crippling",2],["pwk",1],["slimeh",6],["splitparty",2],["guttergrime",1],["marchooze",1]]},
-  {name:"Goblins & Skeletons",tag:"Level 2",col:"var(--t-goblin)",list:[["goblin",55],["gobwiz",4],["sting",25],["arsonist",4],["putrid",11],["scuzz",2],["skelarch",9],["persist",1],["carnage",14],["ankle",3],["trash",1],["dtyrant",1],["gut",5],["bladewing",1],["krenko",1],["armshadar",10],["austere",1],["rampage",1],["vandal",1],["empty",12],["grenade",8],["trumpet",12],["slag",4],["wardrums",5],["skelswarm",7],["rite",2],["gruulchant",2]]},
-  {name:"Giants & Dragons",tag:"Level 3",col:"var(--t-giant)",list:[["giantwiz",70],["baleful",12],["rime",6],["benthic",5],["cinder",4],["necro",8],["spark",8],["noxious",8],["borderland",8],["sunrise",8],["quake",5],["calamity",3],["palisade",1],["kalemne",1],["xanathar",1],["storvald",1],["icingdeath",1],["armshadar",20],["eyes",3],["squash",4],["vandal",1],["slaughter",3],["splitparty",8],["seismic",1],["river",8],["twilight",1],["campfire",1]]}
+// Compact builder for the other hordes. Row: [qty, name, type, tribe, pt, endsWave, extras]
+const TY={L:"legend",C:"creature",c:"common",T:"token",S:"spell",E:"ench",A:"art",P:"pw"};
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,"");
+function rows(prefix,list){return list.map(([q,n,t,tr,pt,ends,x])=>{x=x||{};const k=x.key||(prefix+slug(n));delete x.key;
+  if(!CARDS[k])CARDS[k]=C(n,TY[t],tr,pt||"",ends==null?(t!=="T"&&t!=="c"):ends,x);return [k,q]})}
+
+const DM_CD=rows("dm_",[
+  [5,"Whisper, Blood Liturgist","L","cleric"],[1,"Lyzolda, the Blood Witch","L","cleric"],[1,"Karlach, Fury of Avernus","L","devil"],[1,"Raphael, Fiendish Savior","L","devil"],
+  [60,"Cleric","T","cleric","",false,{key:"dm_cleric",sf:"tcmm/62",tq:['t:token !"Cleric" pow=0','t:token !"Cleric"']}],
+  [82,"Devil","T","devil","1/1",false,{key:"dm_devil",note:"Dies: deals 1 damage to any target",tq:['t:token !"Devil" pow=1 tou=1','t:token !"Devil"']}],
+  [1,"Vile Deacon","C","cleric"],[4,"Shadow-Rite Priest","C","cleric"],[1,"Wayward Disciple","C","cleric","",true,{q:"Pious Evangel // Wayward Disciple",face:1}],
+  [3,"Priest of the Blood Rite","C","cleric"],[11,"Demon's Disciple","C","cleric"],[9,"Havoc Jester","C","devil"],[4,"Hellrider","C","devil"],[8,"Mayhem Devil","C","devil"],
+  [6,"Glistening Goremonger","C","devil","",true,{q:"Pyretic Prankster // Glistening Goremonger",face:1}],[7,"Scourge Devil","C","devil"],
+  [2,"Tibalt, Rakish Instigator","P","pw"],[4,"Rite of Belzenlok","E","ench"]
+]);
+const DM_D=rows("dm_",[
+  [1,"Be'lakor, the Dark Master","L","demon"],[1,"Griselbrand","L","demon"],[1,"Demonlord Belzenlok","L","demon"],
+  [1,"Ormendahl, the Corrupter","L","demon","",true,{q:"Jerren, Corrupted Bishop // Ormendahl, the Corrupter",face:1}],
+  [1,"Kothophed, Soul Hoarder","L","demon"],[1,"Nefarox, Overlord of Grixis","L","demon"],[1,"Ob Nixilis, Unshackled","L","demon"],[1,"Orca, Siege Demon","L","demon"],
+  [1,"Orcus, Prince of Undeath","L","demon"],[1,"Rakdos the Defiler","L","demon"],[1,"Rakdos, the Showstopper","L","demon"],
+  [1,"Archdemon of Greed","L","demon","",true,{q:"Ravenous Demon // Archdemon of Greed",face:1}],[1,"Razaketh, the Foulblooded","L","demon"],
+  [1,"Shimatsu the Bloodcloaked","L","demon"],[1,"Ormendahl, Profane Prince","L","demon","",true,{q:"Westvale Abbey // Ormendahl, Profane Prince",face:1}],
+  [11,"Demon","T","demon","6/6",false,{key:"dm_demon",note:"Flying, trample",tq:['t:token !"Demon" pow=6 tou=6 keyword:flying keyword:trample','t:token !"Demon" pow=6 tou=6']}],
+  [1,"Balor","C","demon"],[1,"Defiler of Souls","C","demon"],[1,"Demon of Catastrophes","C","demon"],[1,"Demon of Dark Schemes","C","demon"],[1,"Demon of Loathing","C","demon"],
+  [1,"Demon of Wailing Agonies","C","demon"],[1,"Demonic Taskmaster","C","demon"],[1,"Demonlord of Ashmouth","C","demon"],[2,"Desecration Demon","C","demon"],[1,"Butcher of the Horde","C","demon"],
+  [9,"Carnifex Demon","C","demon"],[2,"Abhorrent Overlord","C","demon"],[1,"Apocalypse Demon","C","demon"],[1,"Archfiend of Depravity","C","demon"],[1,"Archfiend of Despair","C","demon"],
+  [4,"Archfiend of Sorrows","C","demon"],[1,"Archfiend of Spite","C","demon"],[1,"Doom Whisperer","C","demon"],[1,"Dreadfeast Demon","C","demon"],[5,"Dreadhound","C","demon"],
+  [2,"Eater of Hope","C","demon"],[1,"Embodiment of Agonies","C","demon"],[10,"Goremand","C","demon"],[1,"Harvester of Souls","C","demon"],[1,"Herald of Torment","C","demon"],
+  [1,"Indulgent Tormentor","C","demon"],[1,"Liege of the Pit","C","demon"],[1,"Lord of the Forsaken","C","demon"],[1,"Lord of the Pit","C","demon"],[1,"Lord of the Void","C","demon"],
+  [1,"Minion of Leshrac","C","demon"],[1,"Overseer of the Damned","C","demon"],[2,"Rakshasa Debaser","C","demon"],[1,"Razorjaw Oni","C","demon"],[1,"Reaper from the Abyss","C","demon"],
+  [1,"Shadowborn Demon","C","demon"],[1,"Shadowgrange Archfiend","C","demon"],[2,"Tyrannical Pitlord","C","demon"],[1,"Woebringer Demon","C","demon"],[2,"Xathrid Demon","C","demon"]
+]);
+const CY=rows("cy_",[
+  [1,"Ashad, the Lone Cyberman","L","cyber"],[1,"Cult of Skaro","L","dalek"],[10,"Cyberman Patrol","c","cyber"],[10,"Cybermen Squadron","C","cyber"],
+  [10,"Dalek Drone","c","dalek"],[10,"Dalek Squadron","C","dalek"],[1,"Davros, Dalek Creator","L","dalek"],[1,"Missy","L","cyber"],[1,"The Cyber-Controller","L","cyber"],
+  [1,"The Dalek Emperor","L","dalek"],[1,"The Master, Gallifrey's End","L","dalek"],[1,"The Master, Multiplied","L","dalek"],[1,"The Rani","L","dalek"],[1,"The Valeyard","L","dalek"],
+  [10,"Blasphemous Act","S","spell"],[15,"Cyber Conversion","S","spell"],[10,"Cybership","A","art","",true,{sf:"who/177"}],[10,"Death in Heaven","S","spell"],[5,"Exterminate!","S","spell"],
+  [100,"Cyberman","T","cyber","2/2",false,{key:"cy_cyberman",tq:['t:token !"Cyberman"']}],
+  [100,"Dalek","T","dalek","3/3",false,{key:"cy_dalek",note:"Menace",tq:['t:token !"Dalek"']}]
+]);
+const GZ=rows("gz_",[
+  [1,"Ghalta, Primal Hunger","L","titan","",true,{gz:1}],[1,"Kogla and Yidaro","L","titan","",true,{gz:1}],[1,"Kogla, the Titan Ape","L","titan","",true,{gz:1}],
+  [1,"Luminous Broodmoth","C","titan","",true,{gz:1}],[1,"Titanoth Rex","C","titan","",true,{gz:1}],[1,"Void Beckoner","C","titan","",true,{gz:1}],
+  [1,"Yidaro, Wandering Monster","L","titan","",true,{gz:1}],[1,"Zilortha, Strength Incarnate","L","titan","",true,{gz:1}],
+  [3,"Anim Pakal, Thousandth Moon","L","human"],[1,"General Kudro of Drannith","L","human"],[15,"Gryff Rider","c","human"],[7,"Gryffwing Cavalry","C","human"],
+  [1,"Jirina Kudro","L","human"],[1,"Katilda and Lier","L","human"],[1,"King Darien XLVIII","L","human"],[9,"Knights of Dol Amroth","C","human"],
+  [1,"Kyler, Sigardian Emissary","L","human"],[3,"Odric, Lunarch Marshal","L","human"],[15,"Parish-Blade Trainee","c","human"],[10,"Precinct Captain","C","human"],
+  [4,"Savior of Ollenbock","C","human"],[1,"Torens, Fist of the Angels","L","human"],[1,"Trynn, Champion of Freedom","L","human"],
+  [5,"Captain's Call","S","spell"],[1,"Descend upon the Sinful","S","spell"],[1,"Divine Sacrament","E","ench"],[4,"Glorious Anthem","E","ench"],
+  [5,"Increasing Devotion","S","spell"],[2,"Planar Cleansing","S","spell"],[1,"Play of the Game","S","spell"],
+  [200,"Human Soldier","T","human","1/1",false,{key:"gz_humansoldier",tq:['t:token !"Human Soldier" pow=1 tou=1','t:token !"Human Soldier"']}]
+]);
+const KR_LT=rows("kr_",[
+  [1,"Marit Lage","L","horror","20/20",true,{note:"Flying, indestructible",tq:['t:token !"Marit Lage"']}],
+  [1,"Koma, Cosmos Serpent","L","kraken"],[1,"Runo Stromkirk // Krothuss, Lord of the Deep","L","kraken"],[1,"Wrexial, the Risen Deep","L","kraken"],
+  [1,"Monstrosity of the Lake","L","kraken"],[1,"Gyruda, Doom of Depths","L","kraken"],[1,"The Watcher in the Water","L","kraken"],[1,"Octavia, Living Thesis","L","kraken"],
+  [8,"Tromokratis","L","kraken"],[1,"Brinelin, the Moon Kraken","L","kraken"],[1,"Slinn Voda, the Rising Deep","L","kraken"],
+  [90,"Tentacle","T","kraken","1/1",false,{key:"kr_tentacle",sf:"tltr/4",tq:['t:token !"Tentacle" pow=1 tou=1','t:token !"Tentacle"']}],
+  [20,"Squid","T","kraken","1/1",false,{key:"kr_squid",note:"Islandwalk",sf:"tclb/29",tq:['t:token !"Squid" pow=1 tou=1','t:token !"Squid"']}],
+  [64,"Kraken","T","kraken","1/1",false,{key:"kr_kraken1",note:"Trample",sf:"tmom/4",tq:['t:token !"Kraken" pow=1 tou=1 keyword:trample','t:token !"Kraken" pow=1 tou=1']}],
+  [6,"Kraken","T","kraken","8/8",false,{key:"kr_kraken8",tq:['t:token !"Kraken" pow=8 tou=8']}],
+  [4,"Kraken","T","kraken","9/9",false,{key:"kr_kraken9",tq:['t:token !"Kraken" pow=9 tou=9']}]
+]);
+const KR_C=rows("kr_",[
+  [1,"Serpent of Yawning Depths","C","kraken"],[3,"Denizen of the Deep","C","kraken"],[2,"Inkwell Leviathan","C","kraken"],[2,"Elder Deep-Fiend","C","kraken"],
+  [2,"Fleet Swallower","C","kraken"],[1,"Frost Fair Lure Fish","C","kraken"],[1,"Aboleth Spawn","C","kraken"],[17,"Man-o'-War","c","kraken"],[13,"Nadir Kraken","C","kraken"],
+  [2,"Reservoir Kraken","C","kraken"],[2,"Shipbreaker Kraken","C","kraken"],[1,"Spawning Kraken","C","kraken"],[12,"Tolarian Kraken","c","kraken"],[4,"Hullbreaker Horror","C","kraken"],
+  [1,"Kederekt Leviathan","C","kraken"],[2,"Stormtide Leviathan","C","kraken"],[2,"Nemesis of Reason","C","kraken"],[4,"Tidal Terror","c","kraken"],[4,"Chasm Skulker","C","kraken"],
+  [6,"Colossal Whale","C","kraken"],[3,"Reef Worm","C","kraken"],[10,"Rot-Tide Gargantua","c","kraken"],
+  [3,"Whelming Wave","S","spell"],[2,"Devastation Tide","S","spell"],[3,"Sunken City","E","ench"]
+]);
+rows("kr_",[[1,"Tidal Influence","E","ench","",false,{key:"kr_tidal",fixed:1,note:"Horde commander: can't be targeted or removed"}],
+  [1,"Ominous Seas","E","ench","",false,{key:"kr_ominous",fixed:1,note:"Horde commander: can't be targeted or removed"}]]);
+const VP=rows("vp_",[
+  [1,"Anowon, the Ruin Sage","L","vampire"],[1,"Arvad the Cursed","L","vampire"],[1,"Ascendant Evincar","L","vampire"],[1,"Astarion, the Decadent","L","vampire"],
+  [1,"Drana, Kalastria Bloodchief","L","vampire"],[1,"Drana, Liberator of Malakir","L","vampire"],[1,"Drana, the Last Bloodchief","L","vampire"],[1,"Edgar Markov","L","vampire"],
+  [1,"Edgar, Charmed Groom // Edgar Markov's Coffin","L","vampire"],[1,"Elenda, the Dusk Rose","L","vampire"],[1,"Etrata, the Silencer","L","vampire"],[1,"Evelyn, the Covetous","L","vampire"],
+  [1,"Kalitas, Bloodchief of Ghet","L","vampire"],[1,"Kalitas, Traitor of Ghet","L","vampire"],[1,"Lord Xander, the Collector","L","vampire"],[1,"Olivia Voldaren","L","vampire"],
+  [1,"Olivia, Crimson Bride","L","vampire"],[1,"Timothar, Baron of Bats","L","vampire"],[1,"Vito, Thorn of the Dusk Rose","L","vampire"],[1,"Zagras, Thief of Heartbeats","L","vampire"],
+  [10,"Blood Artist","C","vampire"],[8,"Butcher of Malakir","C","vampire"],[3,"Captivating Vampire","C","vampire"],[23,"Child of Night","c","vampire","2/1",false,{ll:1}],
+  [1,"Eldrazi Monument","A","art"],[7,"Indulgent Aristocrat","C","vampire"],[8,"Innocent Traveler // Malicious Invader","C","vampire"],[3,"Olivia's Wrath","S","spell"],
+  [3,"Patron of the Vein","C","vampire"],[8,"Rakish Heir","C","vampire"],[1,"Ruinous Ultimatum","S","spell"],[7,"Sanguine Bond","E","ench"],[1,"Shared Animosity","E","ench"],
+  [4,"Stensia Masquerade","E","ench"],[7,"Stromkirk Captain","C","vampire"],[18,"Vampire Envoy","c","vampire"],[10,"Vampire Nighthawk","C","vampire","2/3",true,{ll:1}],
+  [3,"Vampire Nocturnus","C","vampire"],[5,"Vampires' Vengeance","S","spell"],
+  [5,"Vampire Knight","T","vampire","",false,{key:"vp_vampireknight",ll:1,sf:"tmoc/20",tq:['t:token !"Vampire Knight"']}],
+  [145,"Vampire","T","vampire","1/1",false,{key:"vp_vampire",ll:1,note:"Lifelink",tq:['t:token !"Vampire" pow=1 tou=1 keyword:lifelink','t:token !"Vampire" pow=1 tou=1']}]
+]);
+
+/* ================= BANNED CARDS (hordemagic.com ban list) ================= */
+const BAN_GROUPS=[
+  ["Creatures",["Elesh Norn, Grand Cenobite","Magus of the Moat","Massacre Wurm","Plague Engineer","Platinum Angel","Platinum Emperion","Rampaging Ferocidon","Silent Arbiter","Stormtide Leviathan","Urabrask the Hidden"]],
+  ["Enchantments",["Aether Flash","Aurification","Authority of the Consuls","Barbed Foliage","Blind Obedience","Dueling Grounds","Island Sanctuary","Lethal Vapors","Leyline of Singularity","No Mercy","Pyrohemia","Rest in Peace","Solitary Confinement","Tainted Aether","Teferi's Moat"]],
+  ["Instants & sorceries",["Surgical Extraction","Eradicate","Haunting Echoes","Mind Funeral","Time Stretch"]],
+  ["Artifacts",["Caltrops","Crawlspace","Ensnaring Bridge","Grindstone","Quietus Spike","Trepanation Blade"]]
+].map(([g,ns])=>[g,ns.map(n=>{const k="ban_"+slug(n);if(!CARDS[k])CARDS[k]=C(n,"art","art","",false,{ban:1});return k})]);
+const BAN_COMBOS=[["Midnight Guard","Elemental Mastery"],["Exquisite Blood","Sanguine Bond"]];
+for(const k in CARDS)CARDS[k].k=k;
+
+/* ================= HORDES ================= */
+const BASIC_RULES=[
+  "Survivors share one life total: 100 for one player, 15 less for each extra player.",
+  "Survivors take three set-up turns before the Horde's first turn.",
+  "The Horde has no hand and infinite mana. Its creatures have haste and are goaded, and only creatures with defender can block.",
+  "Each Horde turn it casts one wave: cards from the top of its library until an uncommon, rare or mythic card enters.",
+  "Each point of damage dealt to the Horde mills one card from its library.",
+  "A legendary creature milled by damage enters the battlefield instead, its enter effects trigger, and it immediately phases out.",
+  "Horde activated abilities happen post-combat, once per turn.",
+  "The Horde always makes choices in its own best interest.",
+  "Survivors win when the Horde's libraries and battlefield are empty. They lose at 0 life, when they can't draw, or at the poison limit."
 ];
-const TOKENS=["goblin","ooze1","ooze","skeleton","dragon5","giantwiz","gobwiz","treasure"];
+const HORDES={
+  dnd:{name:"D&D Dungeon Horde",short:"D&D Dungeon",col:"var(--t-ooze)",depth:"Dungeon depth",win:"Dungeon cleared",
+    blurb:"Three dungeon levels: Oozes, then Goblins & Skeletons, then Giants & Dragons.",
+    intro:"The dungeon awaits. Survivors take three set-up turns.",
+    decks:[
+      {name:"Oozes",tag:"Level 1",col:"var(--t-ooze)",list:[["ooze",38],["expooze",18],["baleful",2],["acidic",6],["biogenic",1],["gcube",13],["ravslime",1],["predooze",1],["sludge",2],["uchuulon",1],["aeve",1],["slurrk",1],["armshadar",1],["creepren",1],["crippling",2],["pwk",1],["slimeh",6],["splitparty",2],["guttergrime",1],["marchooze",1]]},
+      {name:"Goblins & Skeletons",tag:"Level 2",col:"var(--t-goblin)",list:[["goblin",55],["gobwiz",4],["sting",25],["arsonist",4],["putrid",11],["scuzz",2],["skelarch",9],["persist",1],["carnage",14],["ankle",3],["trash",1],["dtyrant",1],["gut",5],["bladewing",1],["krenko",1],["armshadar",10],["austere",1],["rampage",1],["vandal",1],["empty",12],["grenade",8],["trumpet",12],["slag",4],["wardrums",5],["skelswarm",7],["rite",2],["gruulchant",2]]},
+      {name:"Giants & Dragons",tag:"Level 3",col:"var(--t-giant)",list:[["giantwiz",70],["baleful",12],["rime",6],["benthic",5],["cinder",4],["necro",8],["spark",8],["noxious",8],["borderland",8],["sunrise",8],["quake",5],["calamity",3],["palisade",1],["kalemne",1],["xanathar",1],["storvald",1],["icingdeath",1],["armshadar",20],["eyes",3],["squash",4],["vandal",1],["slaughter",3],["splitparty",8],["seismic",1],["river",8],["twilight",1],["campfire",1]]}
+    ],
+    tokens:["goblin","ooze1","ooze","skeleton","dragon5","giantwiz","gobwiz","treasure"],
+    rules:["Levels are played in order. When a level's library runs out, the next level starts on the next Horde turn.",
+      "Carnage Gladiator regenerates once per turn, so it must die twice in a turn to leave the battlefield.",
+      "Krenko, Mob Boss never attacks. It taps post-combat to make Goblins.",
+      "Gut, True-Soul Zealot's attack trigger always sacrifices a Goblin token.",
+      "Post-combat, Death Tyrant and Persistent Specimen may return from the graveyard (once per turn)."]},
+  demons:{name:"Demon Horde",short:"Demons",col:"var(--t-demon)",depth:"Horde libraries",win:"The Demons are banished",
+    blurb:"Clerics and Devils sacrifice for damage and summon the Demon library.",
+    intro:"Clerics gather to summon the Demon Horde. Survivors take three set-up turns.",
+    decks:[{name:"Clerics & Devils",tag:"Library 1",col:"var(--t-devil)",list:DM_CD},{name:"Demons",tag:"Library 2",col:"var(--t-demon)",list:DM_D}],
+    tokens:["dm_devil","dm_cleric","dm_demon","treasure"],flags:{clericPos:1,sac:1},
+    rules:["Two libraries, played in order. When one runs out, the other starts on the next Horde turn.",
+      "Cards that can transform are sleeved transformed: the app shows and plays their back face.",
+      "Clerics only attack if their power is greater than 0.",
+      "When the Horde sacrifices another creature, it picks in this order: a Devil token, a Cleric token, a Demon token, then any card that doesn't sacrifice itself or trigger from another sacrifice.",
+      "The Horde loses when both libraries are empty."]},
+  cyber:{name:"Cyberman Horde",short:"Cybermen",col:"var(--t-cyber)",depth:"Horde library",win:"The invasion is repelled",
+    blurb:"Massive waves of Cybermen and Daleks. Doctor Who.",
+    intro:"The Cybermen are coming. Survivors take three set-up turns.",
+    decks:[{name:"Cybermen & Daleks",tag:"Library",col:"var(--t-cyber)",list:CY}],
+    tokens:["cy_cyberman","cy_dalek","treasure"],
+    rules:["One 300-card library: 50 creatures, 50 support cards and 200 tokens.",
+      "The page also lists 10 Planes. They aren't part of the Horde library, so the app leaves them out."]},
+  godzilla:{name:"Humans & Godzilla Horde",short:"Godzilla",col:"var(--t-titan)",depth:"Horde library",win:"The Titans fall",
+    blurb:"Human soldiers backed by Godzilla-series Titans.",
+    intro:"The ground shakes. Survivors take three set-up turns.",
+    decks:[{name:"Titans & Humans",tag:"Library",col:"var(--t-titan)",list:GZ}],
+    tokens:["gz_humansoldier","treasure"],
+    rules:["One 300-card library: 8 Titans, 92 support cards and 200 Human Soldier tokens.",
+      "Titans use their Godzilla-series versions where they exist."]},
+  kraken:{name:"Kraken Horde",short:"Krakens",col:"var(--t-kraken)",depth:"Horde libraries",win:"The sea is calm",
+    blurb:"Tentacles, Krakens and the tide. Two libraries and two commander enchantments.",
+    intro:"The tide rises. Survivors take three set-up turns.",
+    decks:[{name:"Legends & Tokens",tag:"Library 1",col:"var(--t-kraken)",list:KR_LT},{name:"Creatures",tag:"Library 2",col:"var(--t-horror)",list:KR_C}],
+    start:["kr_tidal","kr_ominous"],tokens:["kr_tentacle","kr_squid","kr_kraken1","kr_kraken8","kr_kraken9","treasure"],flags:{tide:1},
+    rules:["Two libraries, played in order. When one runs out, the other starts on the next Horde turn. The Horde loses when both are empty.",
+      "Tidal Influence and Ominous Seas start on the battlefield as the Horde's commanders. They can't be targeted or removed.",
+      "Tidal Influence gets a tide counter at each Horde upkeep. At exactly 1 counter, blue creatures get −2/−0. At exactly 3, blue creatures get +2/+0. At 4, all counters are removed. This affects the Survivors' blue creatures too.",
+      "Ominous Seas gets a foreshadow counter whenever the Horde draws a card. Remove 8 to create an 8/8 blue Kraken token.",
+      "Shared Treasures: any Survivor can use any Survivor's Treasure. A Treasure entering only triggers abilities of the player who made it."]},
+  vampire:{name:"Vampire Horde",short:"Vampires",col:"var(--t-vampire)",depth:"Horde library",win:"The Vampire Gods are slain",
+    blurb:"Lifelink swarms that regenerate their dead, led by 20 Vampire Gods.",
+    intro:"Night falls. Survivors take three set-up turns.",
+    decks:[{name:"Gods & Support",tag:"Library",col:"var(--t-vampire)",list:VP}],
+    tokens:["vp_vampire","vp_vampireknight","treasure"],flags:{vamp:1},
+    rules:["One 300-card library: 20 Vampire Gods, 130 support cards and 150 tokens.",
+      "Vampire Gods (the Horde's legendary creatures) don't have haste.",
+      "When Horde lifelink creatures deal combat damage to the Survivors, exile one card from the Horde's graveyard per lifelink creature, with a Regeneration counter.",
+      "When a legendary creature enters under the Horde's control from anywhere, every card in exile with a Regeneration counter returns to the battlefield.",
+      "A legendary creature milled from the library enters instead, phases out and can't be targeted that turn.",
+      "When a Horde legendary creature dies, exile it instead.",
+      "Optional emblems (not tracked by the app): at the Horde's upkeep, proliferate, then take control of permanents with 5 or more Bite counters; and whenever a Horde creature damages a permanent it doesn't control, put a Bite counter on it."]}
+};
+let HID="dnd",H=HORDES.dnd,DECKS=H.decks,TOKENS=H.tokens;
+function useHorde(id){HID=HORDES[id]?id:"dnd";H=HORDES[HID];DECKS=H.decks;TOKENS=H.tokens}
+const FL=f=>!!(H.flags&&H.flags[f]);
+
 const SIG={
   ooze:"M12 2.5C8 8.5 5.5 12 5.5 15a6.5 6.5 0 0 0 13 0c0-3-2.5-6.5-6.5-12.5z",
   goblin:"M12 1.5l2.2 10.5H9.8zM7 12h10v2.2H7zM10.9 14.2h2.2V21h-2.2zM10 21h4v1.5h-4z",
@@ -326,102 +518,146 @@ const SIG={
   dragon:"M2 18.5c4.5-1 7.5-4.5 10-10 1 4.5 4.5 7.5 10 8.5-4.5 2.5-7 1.5-10-.5-2.5 2.5-5.5 3.2-10 2z",
   beholder:"M1.5 12C4.5 7 8 4.5 12 4.5S19.5 7 22.5 12c-3 5-6.5 7.5-10.5 7.5S4.5 17 1.5 12zM12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zm0 2.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z",
   horror:"M12 3c-5 0-8 3.5-8 8 0 3 1 5 1 9l2.5-2 2 2.5 2.5-2.5 2.5 2.5 2-2.5L19 20c0-4 1-6 1-9 0-4.5-3-8-8-8zm-3 7a1.6 1.6 0 1 1 0 3.2A1.6 1.6 0 0 1 9 10zm6 0a1.6 1.6 0 1 1 0 3.2 1.6 1.6 0 0 1 0-3.2z",
+  demon:"M4 2c0 5 2 8 5 9-1 1-2 3-2 5a5 5 0 0 0 10 0c0-2-1-4-2-5 3-1 5-4 5-9-2 3-4 4-6 4h-4C8 6 6 5 4 2z",
+  devil:"M12 22l-2-6-6 1 4-4-5-5 6 1 3-7 3 7 6-1-5 5 4 4-6-1z",
+  cleric:"M10.5 2h3v6h6v3h-6v11h-3V11h-6V8h6z",
+  cyber:"M12 1.5l9 5.2v10.6l-9 5.2-9-5.2V6.7zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z",
+  dalek:"M8 3h8v4h2l2 14H4L6 7h2zM10 5v2h4V5z",
+  human:"M12 1.5l8.5 3v7c0 5-3.7 9-8.5 11-4.8-2-8.5-6-8.5-11v-7z",
+  titan:"M3 21c1-6 3-10 6-12L7 3l4 4 2-5 1 6 5-3-3 7c2 2 3 5 3 9z",
+  kraken:"M14 2c4 0 7 3 7 7 0 5-4 8-8 8-2 0-3-1-3-2.5S11 12 12.5 12c1 0 1.5.7 1.5 1.5 2 0 3.5-2 3.5-4.5S15.5 5 13 5c-4 0-7 4-7 9v8H3v-8C3 7 8 2 14 2z",
+  vampire:"M12 7l2-3 1 3c3-2 6-2 8 0-2 1-3 3-3 5-2-1-4-1-5 1l-3 4-3-4c-1-2-3-2-5-1 0-2-1-4-3-5 2-2 5-2 8 0l1-3z",
+  pw:"M12 1.5l7 10.5-7 10.5-7-10.5z",
   spell:"M12 1.5l2.7 7.2H22l-6 4.6 2.3 7.6L12 16.4l-6.3 4.5L8 13.3 2 8.7h7.3z",
   ench:"M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3.5a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13z",
   art:"M12 1.5c1 4 5.5 6.5 5.5 11.5a5.5 5.5 0 0 1-11 0c0-3 2-4.5 2-7.5 2 1 3.2 3.2 3.2 5.5 1-2 1.3-5.5.3-9.5z"
 };
-const TRIBE={ooze:"Ooze",goblin:"Goblin",skeleton:"Skeleton",giant:"Giant",dragon:"Dragon",beholder:"Beholder",horror:"Horror",spell:"",ench:"",art:""};
-const TYPE={token:"Token Creature",common:"Creature",creature:"Creature",legend:"Legendary Creature",spell:"Spell",ench:"Enchantment",art:"Artifact"};
+const TRIBE={ooze:"Ooze",goblin:"Goblin",skeleton:"Skeleton",giant:"Giant",dragon:"Dragon",beholder:"Beholder",horror:"Horror",demon:"Demon",devil:"Devil",cleric:"Cleric",cyber:"Cyberman",dalek:"Dalek",human:"Human",titan:"Titan",kraken:"Kraken",vampire:"Vampire",pw:"",spell:"",ench:"",art:""};
+const TYPE={token:"Token Creature",common:"Creature",creature:"Creature",legend:"Legendary Creature",spell:"Spell",ench:"Enchantment",art:"Artifact",pw:"Planeswalker"};
 
 /* ================= HELPERS ================= */
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const uid=()=>Math.random().toString(36).slice(2,9);
-const card=k=>CARDS[k]||C(k,"token","art","",false);
-const isCre=c=>["token","common","creature","legend"].includes(c.t)&&c.tr!=="art";
+const card=k=>CARDS[k]||C(k,"token","art","",false,{k});
+// Card type checks prefer Scryfall's type line and fall back to the deck data
+const mtype=c=>{const m=META[c.k];return m&&m.type?m.type:null};
+const isCre=c=>{const t=mtype(c);if(t)return /Creature/.test(t);return ["token","common","creature","legend"].includes(c.t)&&c.tr!=="art"};
+const isSpell=k=>{const c=card(k),t=mtype(c);if(t)return /\b(Instant|Sorcery)\b/.test(t);return c.t==="spell"};
+const isLegend=k=>{const c=card(k),t=mtype(c);if(t)return /Legendary/.test(t)&&/Creature/.test(t);return c.t==="legend"};
+const isToken=k=>card(k).t==="token";
+const hasKw=(k,w)=>{const m=META[k];return !!(m&&m.kw&&m.kw.includes(w))};
+const isBlue=k=>{const m=META[k];if(m&&m.colors)return m.colors.includes("U");return card(k).tr==="kraken"};
+const isCleric=k=>{const c=card(k),t=mtype(c);if(t)return /\bCleric\b/.test(t);return c.tr==="cleric"};
+const isLifelink=k=>hasKw(k,"Lifelink")||!!card(k).ll;
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function expand(list){const out=[];list.forEach(([k,q])=>{for(let i=0;i<q;i++)out.push(k)});return out}
-function typeLine(k){const c=card(k);const tr=TRIBE[c.tr];return TYPE[c.t]+(tr?" — "+tr:"")}
+function typeLine(k){const c=card(k);const t=mtype(c);if(t)return t;const tr=TRIBE[c.tr];return TYPE[c.t]+(tr?" — "+tr:"")}
 function endsWave(S,k){if(S.ov&&k in S.ov)return S.ov[k];const c=card(k);if(c.t==="token")return false;const m=META[k];if(m&&m.rarity)return m.rarity!=="common";return c.ends}
-function basePT(S,k){if(S.pt&&S.pt[k]!=null)return S.pt[k];const m=META[k];if(m&&m.pt)return m.pt;return card(k).pt}
+function basePT(S,k){if(S.pt&&S.pt[k]!=null)return S.pt[k];const c=card(k);if(c.t==="token"&&c.sf&&c.pt)return c.pt;const m=META[k];if(m&&m.pt)return m.pt;return card(k).pt}
 
-/* ================= SCRYFALL (card images, rarity, P/T) ================= */
+/* ================= SCRYFALL (card images, rarity, P/T, types) ================= */
 // Images load from Scryfall's CDN in the viewer's browser. Nothing is copied into this repo.
-const META={};const MKEY="dungeon-horde-scryfall-v2";
+const META={};const MKEY="dungeon-horde-scryfall-v5";
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const norm=s=>String(s).toLowerCase().replace(/[’‘]/g,"'").trim();
-function metaFrom(c){
-  const face=(c.card_faces&&c.card_faces[0])||{};
-  const img=(c.image_uris&&c.image_uris.normal)||(face.image_uris&&face.image_uris.normal)||"";
-  const pw=c.power!=null?c.power:face.power, tg=c.toughness!=null?c.toughness:face.toughness;
-  return {img,pt:(pw!=null&&tg!=null)?`${pw}/${tg}`:"",rarity:c.rarity,uri:c.scryfall_uri,artist:c.artist||face.artist||"",set:(c.set||"").toUpperCase()};
+const SFH={"Accept":"application/json"};
+function metaFrom(c,face){
+  const fs=c.card_faces||[];const f=fs[face||0]||{};
+  const img=(face&&f.image_uris&&f.image_uris.normal)||(c.image_uris&&c.image_uris.normal)||(f.image_uris&&f.image_uris.normal)||"";
+  const pw=f.power!=null?f.power:c.power, tg=f.toughness!=null?f.toughness:c.toughness;
+  return {img,pt:(pw!=null&&tg!=null)?`${pw}/${tg}`:"",rarity:c.rarity,uri:c.scryfall_uri,artist:f.artist||c.artist||"",set:(c.set||"").toUpperCase(),
+    type:f.type_line||c.type_line||"",colors:f.colors||c.colors||[],kw:c.keywords||[],fname:c.flavor_name||f.flavor_name||""};
 }
+async function sfGet(url){const r=await fetch(url,{headers:SFH});if(!r.ok)return null;return r.json()}
+async function loadOne(k){
+  const c=CARDS[k];
+  if(c.sf){const j=await sfGet("https://api.scryfall.com/cards/"+c.sf);if(j){META[k]=metaFrom(j,c.face);return}}
+  if(c.gz){const j=await sfGet("https://api.scryfall.com/cards/search?unique=prints&q="+encodeURIComponent('!"'+(c.q||c.n)+'"'));
+    if(j&&j.data&&j.data.length){const pick=j.data.find(d=>d.flavor_name)||j.data[0];META[k]=metaFrom(pick,c.face);return}}
+  if(c.tq){for(const q of [].concat(c.tq)){await sleep(110);const j=await sfGet("https://api.scryfall.com/cards/search?order=released&dir=desc&q="+encodeURIComponent(q));
+    if(j&&j.data&&j.data[0]){META[k]=metaFrom(j.data[0]);return}}return}
+  const j=await sfGet("https://api.scryfall.com/cards/named?exact="+encodeURIComponent(c.q||c.n));if(j)META[k]=metaFrom(j,c.face);
+}
+function saveMeta(){try{localStorage.setItem(MKEY,JSON.stringify({t:Date.now(),m:META}))}catch(e){}}
 async function loadMeta(){
-  try{const c=JSON.parse(localStorage.getItem(MKEY)||"null");if(c&&Date.now()-c.t<14*864e5&&c.m){Object.assign(META,c.m);render();return}}catch(e){}
-  const hdr={"Accept":"application/json"};
+  try{const c=JSON.parse(localStorage.getItem(MKEY)||"null");if(c&&Date.now()-c.t<14*864e5&&c.m){Object.assign(META,c.m);render();applyPins();return}}catch(e){}
   try{
-    const named=Object.keys(CARDS).filter(k=>!CARDS[k].tq);
-    const byName={};named.forEach(k=>byName[norm(CARDS[k].n)]=k);
+    const special=k=>CARDS[k].tq||CARDS[k].sf||CARDS[k].gz;
+    const named=Object.keys(CARDS).filter(k=>!special(k));
+    const byName={};named.forEach(k=>byName[norm(CARDS[k].q||CARDS[k].n)]=k);
     for(let i=0;i<named.length;i+=75){
-      const ids=named.slice(i,i+75).map(k=>({name:CARDS[k].n}));
-      const r=await fetch("https://api.scryfall.com/cards/collection",{method:"POST",headers:{...hdr,"Content-Type":"application/json"},body:JSON.stringify({identifiers:ids})});
+      const ids=named.slice(i,i+75).map(k=>({name:CARDS[k].q||CARDS[k].n}));
+      const r=await fetch("https://api.scryfall.com/cards/collection",{method:"POST",headers:{...SFH,"Content-Type":"application/json"},body:JSON.stringify({identifiers:ids})});
       if(!r.ok)throw new Error("Scryfall "+r.status);
       const j=await r.json();
-      (j.data||[]).forEach(c=>{const k=byName[norm(c.name)]||byName[norm(c.name.split(" // ")[0])];if(k)META[k]=metaFrom(c)});
+      (j.data||[]).forEach(c=>{const k=byName[norm(c.name)]||byName[norm(c.name.split(" // ")[0])];if(k)META[k]=metaFrom(c,CARDS[k].face)});
+      // Anything the batch couldn't match by name gets one more try on its own
+      for(const nf of (j.not_found||[])){const k=byName[norm(nf.name||"")];if(k){await sleep(110);try{await loadOne(k)}catch(e){}}}
       render();await sleep(120);
     }
-    for(const k of Object.keys(CARDS).filter(k=>CARDS[k].tq)){
-      try{
-        // A pinned printing (set/collector number) wins; otherwise search for the newest matching token
-        if(CARDS[k].sf){const r=await fetch("https://api.scryfall.com/cards/"+CARDS[k].sf,{headers:hdr});if(r.ok){META[k]=metaFrom(await r.json());await sleep(120);continue}}
-        const r=await fetch("https://api.scryfall.com/cards/search?order=released&dir=desc&q="+encodeURIComponent(CARDS[k].tq),{headers:hdr});
-        if(r.ok){const j=await r.json();if(j.data&&j.data[0])META[k]=metaFrom(j.data[0])}}catch(e){}
-      await sleep(120);
-    }
-    render();
-    try{localStorage.setItem(MKEY,JSON.stringify({t:Date.now(),m:META}))}catch(e){}
+    for(const k of Object.keys(CARDS).filter(special)){try{await loadOne(k)}catch(e){}await sleep(110)}
+    render();saveMeta();applyPins();
   }catch(e){toast("Couldn't reach Scryfall. Cards will show without images.")}
 }
+// Card images fixed by hand on the phone (Setup → Fix a card image) are stored in the game and shared by every screen
+async function applyPins(){if(!S||!S.pins)return;let ch=false;
+  for(const [k,sf] of Object.entries(S.pins)){if(!CARDS[k]||(META[k]&&META[k].pin===sf))continue;
+    try{const j=await sfGet("https://api.scryfall.com/cards/"+sf);if(j){META[k]=Object.assign(metaFrom(j,CARDS[k].face),{pin:sf});ch=true}}catch(e){}await sleep(110)}
+  if(ch){saveMeta();render()}}
 function refreshMeta(){try{localStorage.removeItem(MKEY)}catch(e){}for(const k in META)delete META[k];loadMeta();toast("Reloading card data from Scryfall")}
 function parsePT(s){const m=/^\s*(-?\d+)\s*\/\s*(-?\d+)\s*$/.exec(s||"");return m?[+m[1],+m[2]]:null}
-function curPT(S,b){const c=card(b.k);if(!isCre(c))return null;const p=parsePT(basePT(S,b.k));const mod=(b.c||0)+(S.buff||0);
-  if(!p)return {txt:mod?`?/?${mod>0?" +"+mod:" "+mod}`:"?/?",pow:null,mod:!!mod};
-  return {txt:`${p[0]+mod}/${p[1]+mod}`,pow:p[0]+mod,mod:!!mod}}
+function tideMod(S,k){if(!FL("tide")||!isBlue(k))return 0;const t=S.board.find(b=>b.k==="kr_tidal");if(!t)return 0;return t.tide===1?-2:t.tide===3?2:0}
+function curPT(S,b){const c=card(b.k);if(!isCre(c))return null;const p=parsePT(basePT(S,b.k));const mod=(b.c||0)+(S.buff||0);const pm=mod+tideMod(S,b.k);
+  if(!p)return {txt:(mod||pm)?`?/?${pm>0?" +"+pm:pm<0?" "+pm:""}`:"?/?",pow:null,mod:!!(mod||pm)};
+  return {txt:`${p[0]+pm}/${p[1]+mod}`,pow:p[0]+pm,mod:!!(mod||pm)}}
 function sigil(tr){return `<svg class="sig" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="${SIG[tr]||SIG.art}"/></svg>`}
 function lifeStart(n){return 100-15*(n-1)}
 function wavesFor(S){if(S.plan==="cycle")return [1,2,3,2][(S.hturn-1)%4];if(S.plan==="players")return S.players;return 1}
 
 /* ================= GAME RULES ================= */
 function log(S,m){S.log.unshift(m);S.log=S.log.slice(0,14)}
-function newState(players,start,plan,prevV){
-  return {v:(prevV||0)+1,status:"playing",players,life:lifeStart(players),poison:0,level:start,
-    libs:DECKS.map(d=>shuffle(expand(d.list))),gys:[[],[],[]],ex:[],board:[],spot:null,
-    turn:1,hturn:0,whose:"players",waves:1,wavesDone:0,wave:[],plan,buff:0,log:["The dungeon awaits. Survivors take three set-up turns."],ov:{},pt:{},atk:false};
+function newState(players,start,plan,prevV,hid){
+  useHorde(hid||"dnd");
+  const S={v:(prevV||0)+1,horde:HID,status:"playing",players,life:lifeStart(players),poison:0,level:Math.min(start||0,DECKS.length-1),
+    libs:DECKS.map(d=>shuffle(expand(d.list))),gys:DECKS.map(()=>[]),ex:[],regen:[],board:[],spot:null,
+    turn:1,hturn:0,whose:"players",waves:1,wavesDone:0,wave:[],plan,buff:0,log:[H.intro],ov:{},pt:{},pins:{},atk:false};
+  (H.start||[]).forEach(k=>{const b=addBoard(S,k,0,true,{fixed:true});if(k==="kr_tidal")b.tide=1;if(k==="kr_ominous")b.fore=0});
+  return S;
 }
-function addBoard(S,k,lvl,gen,extra){const b=Object.assign({u:uid(),k,l:lvl,t:false,c:0,ph:false,rg:false,a:false,bl:false,gen:!!gen},extra||{});S.board.push(b);return b}
-function nextLevel(S){for(let i=0;i<3;i++){const l=(S.level+i)%3;if(S.libs[l].length)return l}return -1}
-function ensureLevel(S){if(!S.libs[S.level].length){const n=nextLevel(S);if(n>=0&&n!==S.level){S.level=n;log(S,`Descending to Level ${n+1}: ${DECKS[n].name}`)}}}
+// Everything entering the Horde's battlefield goes through here, so horde-specific "enters" rules apply in one place
+function addBoard(S,k,lvl,gen,extra){
+  const b=Object.assign({u:uid(),k,l:lvl,t:false,c:0,ph:false,rg:false,a:false,bl:false,gen:!!gen},extra||{});S.board.push(b);
+  if(FL("vamp")&&isLegend(k)){
+    if(S.whose==="horde"&&!b.ph)b.sick=true; // Vampire Gods don't have haste
+    if(!b.noRegen&&S.regen&&S.regen.length){const back=S.regen.splice(0);back.forEach(r=>{S.board.push({u:uid(),k:r.k,l:r.l,t:false,c:0,ph:false,rg:false,a:false,bl:false,gen:false,noRegen:true,sick:S.whose==="horde"})});
+      log(S,`${card(k).n} rises: ${back.length} regenerating card${back.length>1?"s":""} return to the battlefield`)}
+  }
+  return b;
+}
+function nextLevel(S){for(let i=0;i<DECKS.length;i++){const l=(S.level+i)%DECKS.length;if(S.libs[l].length)return l}return -1}
+function ensureLevel(S){if(!S.libs[S.level].length){const n=nextLevel(S);if(n>=0&&n!==S.level){S.level=n;log(S,`The Horde moves on to ${DECKS[n].tag}: ${DECKS[n].name}`)}}}
 const PERSIST={one:1,wave:1,mill:1}; // these stay on the table until closed from the phone
 function setSpot(S,o){S.spot=Object.assign({id:uid(),open:!!PERSIST[o.kind]},o)}
 function revealOne(S){
-  ensureLevel(S);const lib=S.libs[S.level];if(!lib.length)return null;
+  const lib=S.libs[S.level];if(!lib.length)return null;
   const k=lib.shift(),c=card(k),e=endsWave(S,k);
-  if(c.t==="spell"){S.gys[S.level].push(k);log(S,`The Horde casts ${c.n}`)}
+  if(isSpell(k)){S.gys[S.level].push(k);log(S,`The Horde casts ${c.n}`)}
   else{addBoard(S,k,S.level,false);log(S,`${c.n} enters the battlefield`)}
   S.wave.push(k);if(e)S.wavesDone++;
-  if(!lib.length)log(S,`Level ${S.level+1} library is empty`);
+  if(!lib.length)log(S,`${DECKS[S.level].tag} library is empty`+(nextLevel(S)>=0?". The next library starts next Horde turn":""));
   return {k,e};
 }
-function reveal(S){const r=revealOne(S);if(!r)return;setSpot(S,{kind:"one",k:r.k,e:r.e})}
+function reveal(S){ensureLevel(S);const r=revealOne(S);if(!r)return;setSpot(S,{kind:"one",k:r.k,e:r.e})}
 function runWave(S){
-  const start=S.wave.length;let r,n=0;
-  while(n<120){r=revealOne(S);if(!r)break;n++;if(r.e)break}
+  ensureLevel(S);const start=S.wave.length;let r,n=0;
+  while(n<150){r=revealOne(S);if(!r)break;n++;if(r.e)break}
   if(!n)return;setSpot(S,{kind:"wave",ks:S.wave.slice(start),e:!!(r&&r.e)});
 }
 function mill(S,n){
   let m=0,risen=[],all=[];
   for(let i=0;i<n;i++){ensureLevel(S);const lib=S.libs[S.level];if(!lib.length)break;const k=lib.shift();m++;all.push(k);
-    if(card(k).t==="legend"){addBoard(S,k,S.level,false,{ph:true});risen.push(k)}else S.gys[S.level].push(k)}
+    if(isLegend(k)){addBoard(S,k,S.level,false,{ph:true});risen.push(k)}else S.gys[S.level].push(k)}
   log(S,`Horde takes ${n} damage: ${m} card${m===1?"":"s"} milled`);
   risen.forEach(k=>log(S,`${card(k).n} rises from the mill and phases out`));
   setSpot(S,{kind:"mill",n:m,dmg:n,ks:all,risen});
@@ -429,30 +665,62 @@ function mill(S,n){
 function findB(S,u){return S.board.find(b=>b.u===u)}
 function removeB(S,u){S.board=S.board.filter(b=>b.u!==u)}
 function kill(S,u,quiet){
-  const b=findB(S,u);if(!b)return;const c=card(b.k);
+  const b=findB(S,u);if(!b||b.fixed)return;const c=card(b.k);
   if(b.k==="ooze"){removeB(S,u);if(!b.gen)S.gys[b.l].push(b.k);addBoard(S,"ooze1",b.l,true);addBoard(S,"ooze1",b.l,true);if(!quiet)log(S,"An Ooze splits into two 1/1 Oozes");return}
   if(b.k==="carnage"&&!b.rg){b.rg=true;b.t=true;b.a=false;if(!quiet)log(S,"Carnage Gladiator regenerates (once this turn)");return}
-  removeB(S,u);if(!b.gen)S.gys[b.l].push(b.k);if(!quiet)log(S,`${c.n} dies`);
+  removeB(S,u);
+  if(FL("vamp")&&isLegend(b.k)){if(!b.gen)S.ex.push(b.k);if(!quiet)log(S,`${c.n} dies and is exiled`);return}
+  if(!b.gen)S.gys[b.l].push(b.k);if(!quiet)log(S,`${c.n} dies`+(b.k==="dm_devil"?": it deals 1 damage to any target":""));
 }
-function exile(S,u){const b=findB(S,u);if(!b)return;removeB(S,u);if(!b.gen)S.ex.push(b.k);log(S,`${card(b.k).n} is exiled`)}
-function bounce(S,u){const b=findB(S,u);if(!b)return;removeB(S,u);if(!b.gen){S.libs[b.l].unshift(b.k);log(S,`${card(b.k).n} goes on top of the library`)}else log(S,`${card(b.k).n} token is bounced and ceases to exist`)}
+function exile(S,u){const b=findB(S,u);if(!b||b.fixed)return;removeB(S,u);if(!b.gen)S.ex.push(b.k);log(S,`${card(b.k).n} is exiled`)}
+function bounce(S,u){const b=findB(S,u);if(!b||b.fixed)return;removeB(S,u);if(!b.gen){S.libs[b.l].unshift(b.k);log(S,`${card(b.k).n} goes on top of the library`)}else log(S,`${card(b.k).n} token is bounced and ceases to exist`)}
 function startHorde(S){
   ensureLevel(S);S.hturn++;S.whose="horde";S.waves=wavesFor(S);S.wavesDone=0;S.wave=[];S.atk=false;
-  let phased=0;S.board.forEach(b=>{b.t=false;b.rg=false;b.a=false;b.bl=false;if(b.ph){b.ph=false;phased++}});
+  let phased=0;S.board.forEach(b=>{b.t=false;b.rg=false;b.a=false;b.bl=false;b.sick=false;if(b.ph){b.ph=false;phased++}});
   log(S,`Horde turn ${S.hturn} begins: ${S.waves} wave${S.waves>1?"s":""}`);
   if(phased)log(S,`${phased} phased-out card${phased>1?"s":""} phase back in`);
+  const t=S.board.find(b=>b.k==="kr_tidal");
+  if(t){t.tide=(t.tide||0)+1;if(t.tide>=4){t.tide=0;log(S,"Tidal Influence reaches 4 tide counters and resets to 0")}else log(S,`Tidal Influence: ${t.tide} tide counter${t.tide>1?"s":""}${tideText(t.tide)?" · "+tideText(t.tide):""}`)}
   setSpot(S,{kind:"turn"});
 }
-function canAttack(b){const c=card(b.k);return isCre(c)&&!b.t&&!b.ph&&!c.noatk}
+const tideText=n=>n===1?"blue creatures get −2/−0":n===3?"blue creatures get +2/+0":"";
+function canAttack(b){const c=card(b.k);if(!isCre(c)||b.t||b.ph||b.sick||c.noatk)return false;
+  if(FL("clericPos")&&isCleric(b.k)){const p=curPT(S,b);if(!p||p.pow==null||p.pow<=0)return false}
+  return true}
 function declareAttack(S){let n=0;S.board.forEach(b=>{if(canAttack(b)){b.a=true;b.t=true;n++}});S.atk=true;log(S,`${n} creature${n===1?"":"s"} attack`);setSpot(S,{kind:"atk"})}
 function atkTotal(S){let tot=0,unk=0;S.board.forEach(b=>{if(b.a&&!b.bl){const p=curPT(S,b);if(p&&p.pow!=null)tot+=Math.max(0,p.pow);else unk++}});return {tot,unk}}
-function applyAttack(S){const {tot}=atkTotal(S);S.life-=tot;log(S,`Survivors take ${tot} combat damage`);S.board.forEach(b=>{b.a=false;b.bl=false});S.atk=false;setSpot(S,{kind:"hit",n:tot})}
+function applyAttack(S){
+  const {tot}=atkTotal(S);S.life-=tot;log(S,`Survivors take ${tot} combat damage`);
+  if(FL("vamp")){
+    const x=S.board.filter(b=>b.a&&!b.bl&&isLifelink(b.k)&&((curPT(S,b)||{}).pow||0)>0).length;
+    if(x)regenerate(S,x);
+  }
+  S.board.forEach(b=>{b.a=false;b.bl=false});S.atk=false;setSpot(S,{kind:"hit",n:tot});
+}
+// Vampire Horde: exile X graveyard cards with Regeneration counters, choosing in the Horde's interest (strongest creatures first)
+function regenerate(S,x){
+  const pool=[];S.gys.forEach((g,l)=>g.forEach((k,i)=>pool.push({k,l,i})));
+  const pw=k=>{const p=parsePT(basePT(S,k));return p?p[0]:0};
+  pool.sort((a,b)=>(isCre(card(b.k))-isCre(card(a.k)))||(isLegend(b.k)-isLegend(a.k))||(pw(b.k)-pw(a.k))||(b.i-a.i));
+  const pick=pool.slice(0,x);if(!pick.length){log(S,`Lifelink: ${x} card${x>1?"s":""} would regenerate, but the graveyard is empty`);return}
+  pick.sort((a,b)=>b.i-a.i).forEach(p=>{S.gys[p.l].splice(p.i,1)});
+  pick.forEach(p=>S.regen.push({k:p.k,l:p.l}));
+  log(S,`Lifelink: ${pick.length} card${pick.length>1?"s":""} exiled with Regeneration counters (${pick.map(p=>card(p.k).n).join(", ")})`);
+}
 function endHorde(S){S.whose="players";S.turn++;S.board.forEach(b=>{b.a=false;b.bl=false});S.atk=false;log(S,"The Horde's turn ends")}
 function krenko(S,u){const b=findB(S,u);if(!b)return;const n=S.board.filter(x=>card(x.k).tr==="goblin"&&isCre(card(x.k))&&!x.ph).length;b.t=true;for(let i=0;i<n;i++)addBoard(S,"goblin",b.l,true);log(S,`Krenko taps: ${n} Goblin tokens join the mob`);setSpot(S,{kind:"one",k:"goblin",n})}
+// Demon Horde sacrifice priority: Devil token, Cleric token, Demon token, then the weakest non-legendary creature
+function sacPick(S){
+  const ok=S.board.filter(b=>!b.ph&&!b.fixed&&isCre(card(b.k)));
+  for(const k of ["dm_devil","dm_cleric","dm_demon"]){const b=ok.find(x=>x.k===k);if(b)return b}
+  const pw=b=>((curPT(S,b)||{}).pow)||0;
+  return ok.filter(b=>!isLegend(b.k)).sort((a,b)=>pw(a)-pw(b))[0]||null;
+}
+function sacrifice(S){const b=sacPick(S);if(!b){log(S,"The Horde has nothing to sacrifice");return}log(S,`The Horde sacrifices ${card(b.k).n}`);kill(S,b.u)}
 function checkEnd(S){
   if(S.status!=="playing")return;
   if(S.life<=0){S.status="lost";log(S,"The Survivors have fallen");return}
-  if(S.libs.every(l=>!l.length)&&!S.board.length){S.status="won";log(S,"The dungeon is cleared. Survivors win")}
+  if(S.libs.every(l=>!l.length)&&!S.board.some(b=>!b.fixed)){S.status="won";log(S,`${H.win}. Survivors win`)}
 }
 
 /* ================= SYNC (Firebase Realtime Database, one record per table code) ================= */
@@ -464,7 +732,7 @@ const hasFirebase=!!(window.firebase&&CFG&&CFG.apiKey&&CFG.databaseURL);
 const LKEY="dungeon-horde-state-"+(ROOM||"solo");
 let bc=null;try{bc=new BroadcastChannel("dungeon-horde-"+(ROOM||"solo"))}catch(e){}
 function clone(o){return JSON.parse(JSON.stringify(o))}
-function receive(d){if(!d)return;if(!S||d.v>=S.v){S=clone(d);render()}}
+function receive(d){if(!d)return;if(!S||d.v>=S.v){S=clone(d);useHorde(S.horde||"dnd");if(!ui.setupTouched)ui.setup.horde=HID;render();applyPins()}}
 function initSync(){
   if(!hasFirebase){
     syncMode="local";
@@ -495,14 +763,15 @@ function commit(fn){
   if(!S)return;hist.push(JSON.stringify(S));if(hist.length>40)hist.shift();
   fn(S);checkEnd(S);S.v++;render();push();
 }
-function undo(){if(!hist.length)return;const prev=JSON.parse(hist.pop());prev.v=S.v+1;S=prev;render();push();toast("Undone")}
+function undo(){if(!hist.length)return;const prev=JSON.parse(hist.pop());prev.v=S.v+1;S=prev;useHorde(S.horde||"dnd");render();push();toast("Undone")}
 function newRoomCode(){const a="abcdefghjkmnpqrstuvwxyz23456789";let s="";const r=new Uint32Array(6);crypto.getRandomValues(r);r.forEach(x=>s+=a[x%a.length]);return s}
 function pageURL(room,view){const u=new URL(location.href);u.search="";if(room)u.searchParams.set("room",room);if(view)u.searchParams.set("view",view);u.hash="";return u.toString()}
 function goRoom(room,view){location.href=pageURL(room,view)}
 
 /* ================= UI STATE ================= */
-const ui={mode:null,tab:"turn",sel:null,confirmNew:false,millN:1,lifeN:1,peek:false,setup:{players:2,start:0,plan:"one"},lastSpot:null,spotOn:false};
-function getMode(){const v=params.get("view");if(v==="display"||v==="controller")return v;const h=(location.hash||"").slice(1);if(h==="display"||h==="controller")return h;try{return localStorage.getItem("dungeon-horde-mode")}catch(e){return null}}
+const ui={mode:null,tab:"turn",sel:null,confirmNew:false,millN:1,lifeN:1,peek:false,setup:{players:2,start:0,plan:"one",horde:"dnd"},lastSpot:null,spotOn:false};
+const MODES=["display","controller","banned"];
+function getMode(){const v=params.get("view");if(MODES.includes(v))return v;const h=(location.hash||"").slice(1);if(MODES.includes(h))return h;try{return localStorage.getItem("dungeon-horde-mode")}catch(e){return null}}
 function setMode(m){ui.mode=m;try{if(m)localStorage.setItem("dungeon-horde-mode",m);else localStorage.removeItem("dungeon-horde-mode")}catch(e){}
   try{history.replaceState(null,"",pageURL(ROOM,m))}catch(e){}
   if(m==="display")wake();render()}
@@ -514,7 +783,7 @@ function cardHTML(k,opts){
   opts=opts||{};const c=card(k);const b=opts.b;
   const pt=b?curPT(S,b):(isCre(c)?{txt:basePT(S,k)||"?/?",mod:false}:null);
   const cls=["card","tr-"+c.tr];if(b){if(b.t&&!b.ph)cls.push("tapped");if(b.ph)cls.push("phased");if(b.a)cls.push("attacking")}if(opts.n>1)cls.push("stacked");
-  const tags=[];if(b){if(b.a)tags.push(`<span class="tag atk">${b.bl?"Blocked":"Attacking"}</span>`);if(b.ph)tags.push('<span class="tag">Phased out</span>');else if(b.t&&!b.a)tags.push('<span class="tag">Tapped</span>');if(b.c)tags.push(`<span class="tag ctr">${b.c>0?"+":""}${b.c}/${b.c>0?"+":""}${b.c}</span>`);if(b.rg)tags.push('<span class="tag">Regen used</span>')}
+  const tags=[];if(b){if(b.a)tags.push(`<span class="tag atk">${b.bl?"Blocked":"Attacking"}</span>`);if(b.ph)tags.push('<span class="tag">Phased out</span>');else if(b.t&&!b.a)tags.push('<span class="tag">Tapped</span>');if(b.c)tags.push(`<span class="tag ctr">${b.c>0?"+":""}${b.c}/${b.c>0?"+":""}${b.c}</span>`);if(b.rg)tags.push('<span class="tag">Regen used</span>');if(b.sick)tags.push('<span class="tag">No haste</span>');if(b.fixed)tags.push('<span class="tag ctr">Commander</span>');if(b.tide!=null)tags.push(`<span class="tag ctr">Tide ${b.tide}${tideText(b.tide)?" · "+tideText(b.tide):""}</span>`);if(b.fore!=null)tags.push(`<span class="tag ctr">Foreshadow ${b.fore}</span>`)}
   if(!b&&opts.ends)tags.push('<span class="tag atk">Ends wave</span>');
   if(opts.tag)tags.push(`<span class="tag atk">${esc(opts.tag)}</span>`);
   const m=META[k];
@@ -532,8 +801,8 @@ function cardHTML(k,opts){
 }
 function groups(){
   const m=new Map();
-  S.board.forEach(b=>{const key=[b.k,b.t,b.c,b.ph,b.a,b.bl,b.rg].join("|");if(!m.has(key))m.set(key,{key,b,us:[]});m.get(key).us.push(b.u)});
-  const rank=g=>{const c=card(g.b.k);if(c.t==="legend")return 0;if(isCre(c)&&c.t!=="token")return 1;if(c.t==="token"&&isCre(c))return 2;return 3};
+  S.board.forEach(b=>{const key=[b.k,b.t,b.c,b.ph,b.a,b.bl,b.rg,b.sick,b.tide,b.fore].join("|");if(!m.has(key))m.set(key,{key,b,us:[]});m.get(key).us.push(b.u)});
+  const rank=g=>{const c=card(g.b.k);if(g.b.fixed)return -1;if(isLegend(g.b.k))return 0;if(isCre(c)&&c.t!=="token")return 1;if(c.t==="token"&&isCre(c))return 2;return 3};
   return [...m.values()].sort((a,b)=>rank(a)-rank(b)||(b.b.a-a.b.a)||((curPT(S,b.b)||{}).pow||0)-((curPT(S,a.b)||{}).pow||0)||card(a.b.k).n.localeCompare(card(b.b.k).n));
 }
 function boardPower(){let p=0;S.board.forEach(b=>{if(canAttack(b)){const x=curPT(S,b);if(x&&x.pow!=null)p+=Math.max(0,x.pow)}});return p}
@@ -544,10 +813,11 @@ function fillQRs(){document.querySelectorAll("[data-qr]").forEach(el=>{if(el.dat
 
 /* ================= RENDER: landing ================= */
 function renderLanding(){
-  const strip=`<div class="levels-strip">${DECKS.map(d=>`<span class="lvchip"><i style="background:${d.col}"></i>${d.tag}: ${d.name} · ${expand(d.list).length} cards</span>`).join("")}</div>`;
+  const list=`<div class="levels-strip">${Object.values(HORDES).map(h=>`<span class="lvchip"><i style="background:${h.col}"></i>${esc(h.short)}</span>`).join("")}</div>`;
   const modes=`<div class="modes">
-      <button class="mode" data-a="mode" data-m="display"><span class="eyebrow">Second screen</span><h2>Table Display</h2><span>Life total, dungeon depth, the Horde's battlefield and big reveals. Hands-off.</span></button>
-      <button class="mode" data-a="mode" data-m="controller"><span class="eyebrow">Your phone</span><h2>Horde Controller</h2><span>Cast waves, attack, mill on damage, kill or bounce cards, track life and undo mistakes.</span></button>
+      <button class="mode" data-a="mode" data-m="display"><span class="eyebrow">Second screen</span><h2>Table Display</h2><span>Life total, the Horde's libraries, its battlefield and big reveals. Hands-off.</span></button>
+      <button class="mode" data-a="mode" data-m="controller"><span class="eyebrow">Your phone</span><h2>Horde Controller</h2><span>Pick a Horde, cast waves, attack, mill on damage, kill or bounce cards, track life and undo mistakes.</span></button>
+      <button class="mode" data-a="mode" data-m="banned"><span class="eyebrow">Before you build</span><h2>Banned Cards</h2><span>Cards the Survivors can't play in Horde Magic.</span></button>
     </div>`;
   let body;
   if(!hasFirebase){
@@ -555,18 +825,38 @@ function renderLanding(){
   }else if(!ROOM){
     body=`<p>Create a table on the screen you'll use as the display. Your phone joins it by scanning a code.</p>
       <div class="row"><button class="btn pri big" data-a="newroom" style="flex:1">Create a table</button></div>
-      <form class="join" id="joinf"><input class="inp" id="joincode" placeholder="Table code" autocomplete="off" autocapitalize="none" aria-label="Table code"><button class="btn" type="submit">Join</button></form>`;
+      <form class="join" id="joinf"><input class="inp" id="joincode" placeholder="Table code" autocomplete="off" autocapitalize="none" aria-label="Table code"><button class="btn" type="submit">Join</button></form>
+      <div class="row"><button class="btn ghost" data-a="mode" data-m="banned">See the banned cards</button></div>`;
   }else{
     body=`${qrBlock("Table code")}${modes}<p class="hint"><button class="btn ghost" data-a="leaveroom">Use a different table</button></p>`;
   }
   return `<div class="landing">
-    <div class="eyebrow">Horde Magic · D&amp;D Dungeon Horde</div>
+    <div class="eyebrow">Horde Magic</div>
     <h1>Dungeon Horde Table</h1>
-    <p>Run the Horde from your phone while the battlefield plays out on a second screen. Moves sync live between them.</p>
-    ${strip}${body}
+    <p>Run the Horde from your phone while the battlefield plays out on a second screen. Moves sync live between them. Choose which Horde to fight when you start a game.</p>
+    ${list}${body}
     <p>${syncDot()}</p>
-    <p class="credit">Card images and data from Scryfall. Card images © Wizards of the Coast. Unofficial Fan Content permitted under the Wizards of the Coast Fan Content Policy; not approved or endorsed by Wizards.</p>
+    <p class="credit">Deck lists and rules from hordemagic.com. Card images and data from Scryfall. Card images © Wizards of the Coast. Unofficial Fan Content permitted under the Wizards of the Coast Fan Content Policy; not approved or endorsed by Wizards.</p>
   </div>`;
+}
+
+/* ================= RENDER: banned cards ================= */
+function banCard(k){const m=META[k],c=card(k);const inner=m&&m.img?`<img src="${esc(m.img)}" alt="${esc(c.n)}" loading="lazy">`:`<div class="ph">${esc(c.n)}</div>`;
+  return m&&m.uri?`<a class="bcard" href="${esc(m.uri)}" target="_blank" rel="noopener">${inner}<span>${esc(c.n)}</span></a>`:`<div class="bcard">${inner}<span>${esc(c.n)}</span></div>`}
+function banCriteria(){return `<ul class="rules">
+    <li>Anything that makes the Horde completely ineffective is banned. Effects that last until end of turn, or trigger when a permanent enters, are fine.</li>
+    <li>Static effects that keep the Horde's board clear, like giving its creatures −2/−2, are banned.</li>
+    <li>So are cards that make Horde creatures enter tapped, deal lethal damage as they enter, mill the Horde, gain life from total attacking power, or make winning mathematically trivial.</li>
+    <li>Cards that say "you win the game" can't be used.</li></ul>`}
+function renderBanned(){
+  return `<div class="ban">
+    <div><div class="eyebrow">Horde Magic ban list</div><h1>Banned Cards</h1></div>
+    <p class="hint" style="max-width:70ch">Survivors can't put these in their decks. Tap a card to open it on Scryfall.</p>
+    ${banCriteria()}
+    ${BAN_GROUPS.map(([g,ks])=>`<section style="display:flex;flex-direction:column;gap:12px"><h2>${esc(g)} <small class="hint num">${ks.length}</small></h2><div class="bgrid">${ks.map(banCard).join("")}</div></section>`).join("")}
+    <section style="display:flex;flex-direction:column;gap:10px"><h2>Banned combos</h2>${BAN_COMBOS.map(([a,b])=>`<div class="combo">${esc(a)} <i>+</i> ${esc(b)}</div>`).join("")}<p class="hint">Each card is fine on its own. They can't be in the same deck.</p></section>
+    <p class="credit">Ban list from hordemagic.com. Card images via Scryfall · © Wizards of the Coast</p>
+  </div><button class="dswitch" data-a="mode" data-m="">Switch view</button>`;
 }
 
 /* ================= RENDER: display ================= */
@@ -576,9 +866,10 @@ function renderDisplay(){
   const waveTxt=S.whose==="horde"?`Wave ${Math.min(S.wavesDone+(S.wavesDone<S.waves?1:0),S.waves)} of ${S.waves}`:"";
   return `<div class="disp" style="--lvc:${lv.col}">
     <div class="dtop">
-      <div><div class="eyebrow">${lv.tag} of 3</div><h1><span class="lvname">${esc(lv.name)}</span></h1></div>
+      <div><div class="eyebrow">${esc(H.name)}${DECKS.length>1?` · ${lv.tag} of ${DECKS.length}`:""}</div><h1><span class="lvname">${esc(lv.name)}</span></h1></div>
       <div class="turnbox">
-        ${S.status==="won"?'<span class="whose" style="background:var(--heal);color:#0d1a0e">Dungeon cleared</span>':S.status==="lost"?'<span class="whose horde">Survivors defeated</span>':`<span class="whose ${S.whose==="horde"?"horde":""}">${S.whose==="horde"?"Horde's turn":"Survivors' turn"}</span>`}
+        ${S.status==="won"?'<span class="whose" style="background:var(--heal);color:#0d1a0e">${esc(H.win)}</span>':S.status==="lost"?'<span class="whose horde">Survivors defeated</span>':`<span class="whose ${S.whose==="horde"?"horde":""}">${S.whose==="horde"?"Horde's turn":"Survivors' turn"}</span>`}
+        ${(()=>{const t=S.board.find(b=>b.k==="kr_tidal");return t&&tideText(t.tide)?`<span style="color:var(--t-kraken);font-weight:800">Tide ${t.tide}: ${tideText(t.tide)}</span>`:""})()}
         <span>Horde turn <b class="num">${S.hturn}</b></span>
         ${waveTxt?`<span>${waveTxt}</span>`:""}
         ${S.buff?`<span>Horde buff <b class="num" style="color:var(--torch)">+${S.buff}/+${S.buff}</b></span>`:""}
@@ -590,10 +881,11 @@ function renderDisplay(){
         <div class="life num ${low?"low":""}">${S.life}</div>
         ${S.poison?`<div class="vrow"><span>Poison</span><b class="num" style="color:var(--heal)">${S.poison}</b></div>`:""}
       </div>
-      <div class="panel depth"><div class="eyebrow">Dungeon depth</div>
+      <div class="panel depth"><div class="eyebrow">${esc(H.depth)}</div>
         ${DECKS.map((d,i)=>{const n=S.libs[i].length,tot=expand(d.list).length;return `<div class="lv ${i===S.level?"cur":""}" style="--lvc:${d.col}"><span class="lt">${d.tag} · ${esc(d.name)}</span><b class="num">${n}</b><div class="bar"><i style="width:${(n/tot*100).toFixed(1)}%"></i></div></div>`}).join("")}
         <div class="vrow"><span class="lt" style="color:var(--dim)">Graveyard</span><b class="num">${S.gys.reduce((a,g)=>a+g.length,0)}</b></div>
         ${S.ex.length?`<div class="vrow"><span class="lt" style="color:var(--dim)">Exile</span><b class="num">${S.ex.length}</b></div>`:""}
+        ${S.regen&&S.regen.length?`<div class="vrow"><span class="lt" style="color:var(--blood)">Regenerating</span><b class="num">${S.regen.length}</b></div>`:""}
       </div>
       <div class="panel"><div class="eyebrow" style="margin-bottom:8px">Chronicle</div><div class="log">${S.log.slice(0,9).map(m=>`<div>${esc(m)}</div>`).join("")}</div></div>
       ${ROOM?`<div class="panel">${qrBlock("Controller")}</div>`:""}
@@ -620,13 +912,13 @@ function spotHTML(){
   const cards=list=>`<div class="fitbox">${list.map(x=>cardHTML(x.k,{tag:x.tag})).join("")}</div>`;
   const closeHint='<div class="hint2">Close this from the phone when everyone has read it</div>';
   if(s.kind==="one"){
-    const sp=card(s.k).t==="spell";
+    const sp=isSpell(s.k);
     return wrap(`<div class="lbl">${s.n?`Krenko calls ${s.n} Goblins`:sp?"The Horde casts":"Enters the battlefield"}</div>`,cards([{k:s.k,tag:s.e?"Ends wave":""}]),closeHint);
   }
   if(s.kind==="wave"){
-    const spells=s.ks.filter(k=>card(k).t==="spell").length;
-    return wrap(`<div class="lbl">${s.ks.length===1?(card(s.ks[0]).t==="spell"?"The Horde casts":"The wave breaks"):`A wave of ${s.ks.length} pours out`}</div>${spells&&s.ks.length>1?`<div class="sub">${spells} spell${spells>1?"s":""} cast this wave</div>`:""}`,
-      cards(s.ks.map((k,i)=>({k,tag:s.e&&i===s.ks.length-1?"Ends wave":card(k).t==="spell"?"Cast":""}))),closeHint);
+    const spells=s.ks.filter(k=>isSpell(k)).length;
+    return wrap(`<div class="lbl">${s.ks.length===1?(isSpell(s.ks[0])?"The Horde casts":"The wave breaks"):`A wave of ${s.ks.length} pours out`}</div>${spells&&s.ks.length>1?`<div class="sub">${spells} spell${spells>1?"s":""} cast this wave</div>`:""}`,
+      cards(s.ks.map((k,i)=>({k,tag:s.e&&i===s.ks.length-1?"Ends wave":isSpell(k)?"Cast":""}))),closeHint);
   }
   if(s.kind==="mill"){
     const risen=(s.risen||[]).slice();const list=(s.ks||[]).map(k=>{const i=risen.indexOf(k);if(i>=0){risen.splice(i,1);return {k,tag:"Rises · phased out"}}return {k}});
@@ -650,18 +942,18 @@ function fitSpot(){
 
 /* ================= RENDER: controller ================= */
 function renderController(){
-  const tabs=[["turn","Turn"],["board","Board"],["piles","Piles"],["setup","Setup"]];
+  const tabs=[["turn","Turn"],["board","Board"],["piles","Piles"],["rules","Rules"],["setup","Setup"]];
   const nav=`<nav class="nav">${tabs.map(([k,l])=>`<button data-a="tab" data-t="${k}" class="${ui.tab===k?"on":""}">${l}</button>`).join("")}</nav>`;
-  if(!S)return `<div class="ctl"><div class="sec"><div class="eyebrow">Horde Controller · ${syncDot()}</div><h3>Start a new dungeon</h3></div>${setupForm(true)}</div>`;
+  if(!S)return `<div class="ctl"><div class="sec"><div class="eyebrow">Horde Controller · ${syncDot()}</div><h3>Start a new game</h3></div>${setupForm(true)}</div>`;
   const lifeBar=`<div class="lifebar">
     <div class="lb1"><div><div class="eyebrow">Survivors' life</div><div class="lifev num" style="color:${S.life<=20?"var(--blood)":"var(--ink)"}">${S.life}</div></div>
-      <div class="meta">${DECKS[S.level].tag}: <b>${esc(DECKS[S.level].name)}</b><br>Library <b class="num">${S.libs[S.level].length}</b> · ${S.whose==="horde"?`<b style="color:var(--blood)">Horde turn ${S.hturn}</b>`:"Survivors' turn"}<br>${syncDot()}</div></div>
+      <div class="meta">${esc(H.short)}${DECKS.length>1?` · ${DECKS[S.level].tag}`:""}: <b>${esc(DECKS[S.level].name)}</b><br>Library <b class="num">${S.libs[S.level].length}</b> · ${S.whose==="horde"?`<b style="color:var(--blood)">Horde turn ${S.hturn}</b>`:"Survivors' turn"}<br>${syncDot()}</div></div>
     <div class="lifebtns"><button class="btn red" data-a="life" data-d="-5">−5</button><button class="btn red" data-a="life" data-d="-1">−1</button><button class="btn" data-a="undo" ${hist.length?"":"disabled"}>Undo</button><button class="btn" data-a="poison">+Psn</button><button class="btn grn" data-a="life" data-d="1">+1</button><button class="btn grn" data-a="life" data-d="5">+5</button></div>
     ${S.spot&&S.spot.open&&PERSIST[S.spot.kind]?`<div class="spotbar"><span>On the table: ${esc(spotDesc(S.spot))}</span><button class="btn" data-a="closeReveal">Close reveal</button></div>`:""}
   </div>`;
   let body="";
-  if(ui.tab==="turn")body=turnTab();else if(ui.tab==="board")body=boardTab();else if(ui.tab==="piles")body=pilesTab();else body=setupTab();
-  return `<div class="ctl">${lifeBar}${S.status!=="playing"?`<div class="sec"><div class="banner ${S.status}">${S.status==="won"?"Dungeon cleared. Survivors win!":"The Survivors have fallen."}</div></div>`:""}${body}</div>${nav}`;
+  if(ui.tab==="turn")body=turnTab();else if(ui.tab==="board")body=boardTab();else if(ui.tab==="piles")body=pilesTab();else if(ui.tab==="rules")body=rulesTab();else body=setupTab();
+  return `<div class="ctl">${lifeBar}${S.status!=="playing"?`<div class="sec"><div class="banner ${S.status}">${S.status==="won"?esc(H.win)+". Survivors win!":"The Survivors have fallen."}</div></div>`:""}${body}</div>${nav}`;
 }
 function millSec(){return `<div class="sec"><h3>Horde takes damage <small>1 damage mills 1 card</small></h3>
   <div class="row"><div class="stepper"><button data-a="millN" data-d="-1" aria-label="Less">−</button><input id="millN" class="num" inputmode="numeric" value="${ui.millN}" aria-label="Damage"><button data-a="millN" data-d="1" aria-label="More">+</button></div><button class="btn pri" data-a="mill">Mill ${ui.millN}</button></div>
@@ -673,7 +965,7 @@ function turnTab(){
       <p class="hint">${first?"Survivors take three set-up turns before the Horde's first turn.":"Track damage and life as the Survivors play. Start the Horde's turn when they pass."}</p>
       <button class="btn pri big" data-a="startHorde" ${S.status!=="playing"?"disabled":""}>Start Horde turn ${S.hturn+1}</button>
       <p class="hint">Next turn: ${(()=>{const t={...S,hturn:S.hturn+1};return wavesFor(t)})()} wave(s). Untaps the Horde and phases in phased-out cards.</p></div>
-      ${millSec()}${recentSec()}`;
+      ${hordeExtras()}${millSec()}${recentSec()}`;
   }
   const left=S.waves-S.wavesDone;const {tot,unk}=atkTotal(S);
   const attackers=S.board.filter(b=>b.a);
@@ -685,17 +977,39 @@ function turnTab(){
       ${S.wave.length?`<div class="chips">${S.wave.slice(-12).map(k=>`<span class="chip tr-${card(k).tr}">${esc(card(k).n)}${endsWave(S,k)?" ·":""}</span>`).join("")}</div>`:""}
     </div>
     <div class="sec"><h3>2 · Combat ${S.atk?`<small class="num">${tot}${unk?"+?":""} unblocked</small>`:""}</h3>
-      ${S.atk?`${attackers.length?`<p class="hint">Tap any attacker the Survivors blocked. Damage from blocked creatures is handled on the Board tab.</p><div class="list">${attackers.map(b=>{const p=curPT(S,b);return `<div class="li tr-${card(b.k).tr}" style="--tc:var(--t-${card(b.k).tr})"><span>${esc(card(b.k).n)} <b class="num">${p?p.txt:""}</b></span><button class="btn ${b.bl?"on":""}" data-a="block" data-u="${b.u}">${b.bl?"Blocked":"Unblocked"}</button></div>`}).join("")}</div>`:'<p class="hint">No creatures could attack.</p>'}
+      ${S.atk?`${attackers.length?`<p class="hint">Tap any attacker the Survivors blocked. If a blocker kills it, tap Killed.</p><div class="list">${attackers.map(b=>{const p=curPT(S,b);return `<div class="li tr-${card(b.k).tr}" style="--tc:var(--t-${card(b.k).tr})"><span>${esc(card(b.k).n)} <b class="num">${p?p.txt:""}</b></span><span class="row" style="flex-wrap:nowrap">${b.bl?`<button class="btn red" data-a="blockKill" data-u="${b.u}">Killed</button>`:""}<button class="btn ${b.bl?"on":""}" data-a="block" data-u="${b.u}">${b.bl?"Blocked":"Unblocked"}</button></span></div>`}).join("")}</div>`:'<p class="hint">No creatures could attack.</p>'}
         <button class="btn red big" data-a="applyAtk">Deal ${tot} damage to Survivors</button>${unk?`<p class="hint">${unk} attacker(s) have no known power. Set their P/T on the Board tab or adjust life by hand.</p>`:""}`
-      :`<button class="btn red big" data-a="attack" ${S.board.some(canAttack)?"":"disabled"}>Declare attack · ${boardPower()} power</button><p class="hint">All untapped creatures attack (haste, goaded). Krenko and phased-out cards stay home.</p>`}
+      :`<button class="btn red big" data-a="attack" ${S.board.some(canAttack)?"":"disabled"}>Declare attack · ${boardPower()} power</button><p class="hint">${FL("vamp")?"All untapped creatures attack, except Vampire Gods that entered this turn.":FL("clericPos")?"All untapped creatures attack. Clerics with 0 or less power stay home.":"All untapped creatures attack (haste, goaded). Krenko and phased-out cards stay home."}</p>`}
     </div>
     <div class="sec"><h3>3 · Post-combat abilities</h3>
       ${kr?`<button class="btn" data-a="krenko" data-u="${kr.u}">Krenko taps: make Goblins</button>`:""}
       ${gyRet.length?gyRet.map(g=>`<button class="btn" data-a="gyret" data-l="${g.l}" data-i="${g.i}">Return ${esc(card(g.k).n)} from graveyard</button>`).join(""):""}
       ${!kr&&!gyRet.length?'<p class="hint">Nothing to activate. Each activated ability works once per Horde turn.</p>':""}
     </div>
+    ${hordeExtras()}
     <div class="sec"><button class="btn big" data-a="endHorde">End Horde turn</button></div>
     ${millSec()}${recentSec()}`;
+}
+function hordeExtras(){
+  let h="";
+  const t=S.board.find(b=>b.k==="kr_tidal"),o=S.board.find(b=>b.k==="kr_ominous");
+  if(t||o)h+=`<div class="sec"><h3>Horde commanders</h3><div class="tidebox">
+    ${t?`<span>Tidal Influence · <b class="num">${t.tide}</b> tide${tideText(t.tide)?` · <span style="color:var(--t-kraken)">${tideText(t.tide)}</span>`:""}</span><div class="stepper"><button data-a="tide" data-d="-1" aria-label="Remove tide counter">−</button><button data-a="tide" data-d="1" aria-label="Add tide counter">+</button></div>`:""}
+    ${o?`<span>Ominous Seas · <b class="num">${o.fore}</b> foreshadow</span><div class="stepper"><button data-a="fore" data-d="-1" aria-label="Remove foreshadow counter">−</button><button data-a="fore" data-d="1" aria-label="Add foreshadow counter">+</button></div>`:""}
+    </div>${o?`<button class="btn" data-a="foreKraken" ${o.fore>=8?"":"disabled"}>Remove 8 foreshadow: create an 8/8 Kraken</button>`:""}
+    <p class="hint">A tide counter is added automatically at the start of each Horde turn.</p></div>`;
+  if(FL("sac")&&S.whose==="horde"){const b=sacPick(S);h+=`<div class="sec"><h3>Sacrifice</h3><button class="btn" data-a="sac" ${b?"":"disabled"}>Horde sacrifices a creature${b?`: ${esc(card(b.k).n)}`:""}</button><p class="hint">Picks a Devil token, then a Cleric token, then a Demon token, then the weakest non-legendary creature.</p></div>`}
+  if(FL("vamp")&&S.regen&&S.regen.length)h+=`<div class="sec"><h3>Regenerating <small class="num">${S.regen.length} in exile</small></h3><p class="hint">These return the next time a Vampire God enters the battlefield.</p></div>`;
+  return h;
+}
+function rulesTab(){
+  return `<div class="sec"><h3>${esc(H.name)}</h3><ul class="rules">${H.rules.map(r=>`<li>${esc(r)}</li>`).join("")}</ul></div>
+  <div class="sec"><h3>Basic Horde rules</h3><ul class="rules">${BASIC_RULES.map(r=>`<li>${esc(r)}</li>`).join("")}</ul></div>
+  <div class="sec"><h3>Banned cards <small>Survivors can't play these</small></h3>
+    ${BAN_GROUPS.map(([g,ks])=>`<div><div class="eyebrow" style="margin:6px 0">${esc(g)}</div><div class="chips">${ks.map(k=>META[k]&&META[k].uri?`<a class="chip" style="--tc:var(--blood);text-decoration:none;color:var(--ink)" href="${esc(META[k].uri)}" target="_blank" rel="noopener">${esc(card(k).n)}</a>`:`<span class="chip" style="--tc:var(--blood)">${esc(card(k).n)}</span>`).join("")}</div></div>`).join("")}
+    <div class="eyebrow" style="margin:6px 0">Banned combos</div>${BAN_COMBOS.map(([a,b])=>`<div class="combo" style="font-size:14px">${esc(a)} <i>+</i> ${esc(b)}</div>`).join("")}
+    ${banCriteria()}
+  </div>`;
 }
 function recentSec(){return `<div class="sec"><h3>Chronicle</h3><div class="log" style="font-size:13.5px">${S.log.slice(0,6).map(m=>`<div>${esc(m)}</div>`).join("")}</div></div>`}
 function boardTab(){
@@ -708,13 +1022,13 @@ function boardTab(){
 }
 function grpHTML(g){
   const b=g.b,c=card(b.k),p=curPT(S,b),open=g.us.includes(ui.sel);const n=g.us.length;
-  const st=[];if(b.a)st.push(b.bl?"blocked":"attacking");if(b.ph)st.push("phased out");else if(b.t)st.push("tapped");if(b.rg)st.push("regen used");if(b.gen)st.push("token copy");
+  const st=[];if(b.a)st.push(b.bl?"blocked":"attacking");if(b.ph)st.push("phased out");else if(b.t)st.push("tapped");if(b.rg)st.push("regen used");if(b.gen&&!b.fixed)st.push("token copy");if(b.sick)st.push("no haste");
   const pB=parsePT(basePT(S,b.k));
   return `<div class="grp tr-${c.tr} ${b.t?"tapped":""} ${b.ph?"phased":""}" style="--tc:var(--t-${c.tr})">
     <button data-a="sel" data-u="${g.us[0]}" aria-expanded="${open}"><span class="gn">${n>1?`<span class="num" style="color:var(--torch)">${n}×</span> `:""}${esc(c.n)}</span><span class="gp num">${p?esc(p.txt):""}${b.c?`<small>${b.c>0?"+":""}${b.c} counters</small>`:""}</span><span class="gs">${esc(typeLine(b.k))}${st.length?" · "+st.join(" · "):""}</span></button>
     ${open?`<div class="acts">
       ${META[b.k]&&META[b.k].img||c.note||(META[b.k]&&META[b.k].uri)?`<div class="full" style="display:flex;gap:10px;align-items:flex-start">${META[b.k]&&META[b.k].img?`<img class="thumb" src="${esc(META[b.k].img)}" alt="${esc(c.n)}" loading="lazy">`:""}<div style="display:flex;flex-direction:column;gap:6px;min-width:0">${c.note?`<span class="hint"><b style="color:var(--ink)">House rule:</b> ${esc(c.note)}</span>`:""}${META[b.k]&&META[b.k].uri?`<a class="btn" style="text-decoration:none;text-align:center" href="${esc(META[b.k].uri)}" target="_blank" rel="noopener">Open on Scryfall</a>`:""}${META[b.k]&&META[b.k].artist?`<span class="credit">Art: ${esc(META[b.k].artist)} · ${esc(META[b.k].set)}</span>`:""}</div></div>`:""}
-      <button class="btn" data-a="tap" data-u="${ui.sel}">${b.t?"Untap":"Tap"}</button>
+      ${b.fixed?`<p class="hint full">Horde commander: it can't be targeted or removed. Track its counters on the Turn tab.</p>`:`<button class="btn" data-a="tap" data-u="${ui.sel}">${b.t?"Untap":"Tap"}</button>
       <button class="btn red" data-a="kill" data-u="${ui.sel}">${b.k==="ooze"?"Kill (split)":b.k==="carnage"&&!b.rg?"Kill (regen)":"Kill"}</button>
       <button class="btn" data-a="exile" data-u="${ui.sel}">Exile</button>
       <button class="btn" data-a="ctr" data-u="${ui.sel}" data-d="1">+1/+1</button>
@@ -722,38 +1036,54 @@ function grpHTML(g){
       <button class="btn" data-a="phase" data-u="${ui.sel}">${b.ph?"Phase in":"Phase out"}</button>
       <button class="btn" data-a="bounce" data-u="${ui.sel}">To library</button>
       ${b.a?`<button class="btn ${b.bl?"on":""}" data-a="block" data-u="${ui.sel}">${b.bl?"Blocked":"Unblocked"}</button>`:`<button class="btn" data-a="atk1" data-u="${ui.sel}">Attack</button>`}
+      ${b.a&&b.bl?`<button class="btn red full" data-a="blockKill" data-u="${ui.sel}">Blocked and killed</button>`:""}
       ${n>1?`<button class="btn red" data-a="killAll" data-key="${esc(g.key)}">Kill all ${n}</button>`:'<span></span>'}
       ${isCre(c)?`<div class="pte"><span>Base P/T for every ${esc(c.n)}</span><input id="pt-${b.k}" value="${esc(basePT(S,b.k)||"")}" placeholder="4/4" aria-label="Base power and toughness"><button class="btn" data-a="setpt" data-k="${b.k}">Set</button></div>`:""}
-      ${n>1?`<p class="hint full">Actions apply to one ${esc(c.n)} at a time.</p>`:""}
+      ${n>1?`<p class="hint full">Actions apply to one ${esc(c.n)} at a time.</p>`:""}`}
     </div>`:""}
   </div>`;
 }
 function pilesTab(){
-  return `<div class="sec"><h3>Current level</h3>
+  return `<div class="sec"><h3>${DECKS.length>1?"Active library":"Library"}</h3>
     <div class="g2"><button class="btn" data-a="shuffle">Shuffle library</button><button class="btn ${ui.peek?"on":""}" data-a="peek">${ui.peek?"Hide top 3":"Peek top 3"}</button></div>
     ${ui.peek?`<div class="peek">${S.libs[S.level].slice(0,3).map((k,i)=>`<div>${i+1}. <b>${esc(card(k).n)}</b> <span class="hint">${esc(typeLine(k))}</span></div>`).join("")||'<span class="hint">Library is empty.</span>'}<p class="hint">Only you can see this.</p></div>`:""}
-    <label class="f" for="lvlsel">Switch the active Horde</label>
-    <select id="lvlsel" data-ch="level">${DECKS.map((d,i)=>`<option value="${i}" ${i===S.level?"selected":""}>${d.tag}: ${esc(d.name)} (${S.libs[i].length} left)</option>`).join("")}</select>
+    ${DECKS.length>1?`<label class="f" for="lvlsel">Switch the active library</label>
+    <select id="lvlsel" data-ch="level">${DECKS.map((d,i)=>`<option value="${i}" ${i===S.level?"selected":""}>${d.tag}: ${esc(d.name)} (${S.libs[i].length} left)</option>`).join("")}</select>`:""}
   </div>
   ${DECKS.map((d,l)=>{const g=S.gys[l];if(!g.length)return "";const cnt={};g.forEach((k,i)=>{(cnt[k]=cnt[k]||[]).push(i)});
-    return `<div class="sec"><h3>${d.tag} graveyard <small class="num">${g.length}</small></h3><div class="list">${Object.entries(cnt).map(([k,is])=>`<div class="li" style="--tc:var(--t-${card(k).tr})"><span>${is.length>1?`<b class="num">${is.length}×</b> `:""}${esc(card(k).n)}</span>${card(k).t!=="spell"?`<button class="btn" data-a="gyret" data-l="${l}" data-i="${is[is.length-1]}">To battlefield</button>`:""}</div>`).join("")}</div></div>`}).join("")}
+    return `<div class="sec"><h3>${DECKS.length>1?d.tag+" graveyard":"Graveyard"} <small class="num">${g.length}</small></h3><div class="list">${Object.entries(cnt).map(([k,is])=>`<div class="li" style="--tc:var(--t-${card(k).tr})"><span>${is.length>1?`<b class="num">${is.length}×</b> `:""}${esc(card(k).n)}</span><span class="row" style="flex-wrap:nowrap"><button class="btn" data-a="gyhand" data-l="${l}" data-i="${is[is.length-1]}">To hand</button>${!isSpell(k)?`<button class="btn" data-a="gyret" data-l="${l}" data-i="${is[is.length-1]}">To battlefield</button>`:""}</span></div>`).join("")}</div></div>`}).join("")}
+  ${S.gys.some(g=>g.length)?'<p class="hint">The Horde has no hand, so To hand puts the card on top of its library.</p>':""}
+  ${S.regen&&S.regen.length?`<div class="sec"><h3>Regenerating <small class="num">${S.regen.length}</small></h3><div class="list">${S.regen.map((r,i)=>`<div class="li" style="--tc:var(--t-${card(r.k).tr})"><span>${esc(card(r.k).n)}</span><span class="row" style="flex-wrap:nowrap"><button class="btn" data-a="regenGy" data-i="${i}">To graveyard</button><button class="btn" data-a="regenBf" data-i="${i}">To battlefield</button></span></div>`).join("")}</div></div>`:""}
   ${S.ex.length?`<div class="sec"><h3>Exile <small class="num">${S.ex.length}</small></h3><div class="chips">${S.ex.map(k=>`<span class="chip tr-${card(k).tr}">${esc(card(k).n)}</span>`).join("")}</div></div>`:""}`;
 }
 function setupForm(fresh){
   const s=ui.setup;
-  return `<div class="sec"><label class="f" for="players">Survivors (players)</label>
+  const hd=HORDES[s.horde]||HORDES.dnd;
+  return `<div class="sec"><span class="f">Horde</span>
+    <div class="hordes">${Object.entries(HORDES).map(([id,h])=>`<button class="hpick ${s.horde===id?"on":""}" style="--hc:${h.col}" data-a="pickHorde" data-h="${id}"><b>${esc(h.name)}</b><span>${esc(h.blurb)}</span><span class="num">${h.decks.map(d=>`${esc(d.name)} · ${expand(d.list).length}`).join(" / ")}</span></button>`).join("")}</div>
+    <label class="f" for="players">Survivors (players)</label>
     <div class="g3" style="grid-template-columns:repeat(4,1fr)">${[1,2,3,4].map(n=>`<button class="btn ${s.players===n?"on":""}" data-a="setp" data-n="${n}">${n}<br><span class="hint num">${lifeStart(n)} life</span></button>`).join("")}</div>
-    <label class="f" for="startlv">Start at<select id="startlv" data-ch="startlv">${DECKS.map((d,i)=>`<option value="${i}" ${s.start===i?"selected":""}>${d.tag}: ${esc(d.name)}</option>`).join("")}</select></label>
+    ${hd.decks.length>1?`<label class="f" for="startlv">Start with<select id="startlv" data-ch="startlv">${hd.decks.map((d,i)=>`<option value="${i}" ${s.start===i?"selected":""}>${d.tag}: ${esc(d.name)}</option>`).join("")}</select></label>`:""}
     <label class="f" for="plan">Waves per Horde turn<select id="plan" data-ch="plan">
       <option value="one" ${s.plan==="one"?"selected":""}>1 wave every turn</option>
       <option value="cycle" ${s.plan==="cycle"?"selected":""}>Cycle 1, 2, 3, 2, 1…</option>
       <option value="players" ${s.plan==="players"?"selected":""}>1 wave per Survivor</option></select></label>
-    <button class="btn pri big" data-a="newgame">${fresh?"Begin the descent":ui.confirmNew?"Tap again to wipe this game":"Start a new game"}</button>
+    <button class="btn pri big" data-a="newgame">${fresh?"Start the game":ui.confirmNew?"Tap again to wipe this game":"Start a new game"}</button>
     ${!fresh&&ui.confirmNew?'<button class="btn ghost" data-a="cancelNew">Keep current game</button>':""}
   </div>`;
 }
+function hordeKeys(){return [...new Set(DECKS.flatMap(d=>d.list.map(x=>x[0])).concat(H.start||[],TOKENS))]}
+function imgFixSec(){
+  const ks=hordeKeys();const missing=ks.filter(k=>!(META[k]&&META[k].img));
+  return `<div class="sec"><h3>Card images <small class="num">${missing.length?missing.length+" missing":"all found"}</small></h3>
+    ${missing.length?`<p class="hint">No Scryfall image yet for: ${missing.map(k=>esc(card(k).n)+(card(k).pt&&card(k).t==="token"?" "+card(k).pt:"")).join(", ")}.</p>`:""}
+    <label class="f" for="fixk">Card<select id="fixk">${ks.sort((a,b)=>card(a).n.localeCompare(card(b).n)).map(k=>`<option value="${k}" ${missing[0]===k?"selected":""}>${esc(card(k).n)}${card(k).t==="token"&&card(k).pt?" "+card(k).pt:""}${META[k]&&META[k].img?"":" (missing)"}</option>`).join("")}</select></label>
+    <label class="f" for="fixu">Scryfall link<input class="inp" id="fixu" placeholder="https://scryfall.com/card/tpca/17/ooze" autocomplete="off" autocapitalize="none"></label>
+    <button class="btn" data-a="fixImg">Use this printing</button>
+    <p class="hint">The chosen printing is shared with every screen at this table and kept for new games.</p></div>`;
+}
 function setupTab(){
-  const all=[...new Set(DECKS.flatMap(d=>d.list.map(x=>x[0])))];
+  const all=[...new Set(DECKS.flatMap(d=>d.list.map(x=>x[0])))].filter(k=>card(k).t!=="token");
   return `<div class="sec"><h3>Table display</h3>
     <div class="g3">${Object.entries(SIZES).map(([k,l])=>`<button class="btn ${(S.size||"fit")===k?"on":""}" data-a="size" data-s="${k}">${l}</button>`).join("")}</div>
     <p class="hint">Fit to screen makes cards as big as possible while showing the whole battlefield. Large and Huge use fixed sizes and scroll when the board fills up.</p></div>
@@ -769,7 +1099,9 @@ function setupTab(){
   </details></div>
   <div class="sec"><h3>New game</h3></div>${setupForm(false)}
   <div class="sec"><h3>This table ${ROOM?`<small>Code <b class="num" style="color:var(--torch)">${esc(ROOM)}</b></small>`:""}</h3>
-    <button class="btn" data-a="refreshMeta">Reload card images and data from Scryfall</button>
+    <button class="btn" data-a="refreshMeta">Reload card images and data from Scryfall</button></div>
+  ${imgFixSec()}
+  <div class="sec">
     <button class="btn ghost" data-a="mode" data-m="">Switch this device to another view</button></div>`;
 }
 
@@ -796,7 +1128,7 @@ function render(){
   if(S)ui.seenOnce=true;
   const sy=window.scrollY;
   const app=$("#app");
-  app.innerHTML=(hasFirebase&&!ROOM)?renderLanding():ui.mode==="display"?renderDisplay():ui.mode==="controller"?renderController():renderLanding();
+  app.innerHTML=ui.mode==="banned"?renderBanned():(hasFirebase&&!ROOM)?renderLanding():ui.mode==="display"?renderDisplay():ui.mode==="controller"?renderController():renderLanding();
   if(ui.mode==="controller")window.scrollTo(0,sy);
   fillQRs();
   if(ui.mode==="display"){fitDisplay();fitSpot()}
@@ -821,6 +1153,8 @@ const A={
   applyAtk:()=>commit(applyAttack),
   endHorde:()=>commit(endHorde),
   krenko:d=>commit(S=>krenko(S,d.u)),
+  blockKill:d=>{commit(S=>{const b=findB(S,d.u);if(!b)return;log(S,`${card(b.k).n} is blocked`);kill(S,d.u)});if(ui.sel&&!findB(S,ui.sel))ui.sel=null;render()},
+  gyhand:d=>commit(S=>{const k=S.gys[+d.l].splice(+d.i,1)[0];if(k){S.libs[+d.l].unshift(k);log(S,`${card(k).n} returns to the top of the ${DECKS[+d.l].tag} library`)}}),
   gyret:d=>commit(S=>{const k=S.gys[+d.l].splice(+d.i,1)[0];if(k){addBoard(S,k,+d.l,false);log(S,`${card(k).n} returns from the graveyard`);setSpot(S,{kind:"one",k})}}),
   token:d=>commit(S=>{addBoard(S,d.k,S.level,true);log(S,`The Horde creates a ${card(d.k).n} token`)}),
   sel:d=>{ui.sel=ui.sel===d.u?null:d.u;render()},
@@ -845,12 +1179,22 @@ const A={
   setp:d=>{ui.setup.players=+d.n;render()},
   newgame:()=>{
     if(S&&!ui.confirmNew){ui.confirmNew=true;render();return}
-    const ov=S?S.ov:{},pt=S?S.pt:{};
-    const ns=newState(ui.setup.players,ui.setup.start,ui.setup.plan,S?S.v:0);ns.ov=ov||{};ns.pt=pt||{};ns.size=S?S.size:undefined;
+    const ov=S?S.ov:{},pt=S?S.pt:{},pins=S&&S.pins?S.pins:{};
+    const ns=newState(ui.setup.players,ui.setup.start,ui.setup.plan,S?S.v:0,ui.setup.horde);ns.ov=ov||{};ns.pt=pt||{};ns.pins=pins;ns.size=S?S.size:undefined;
     hist=[];ui.confirmNew=false;ui.tab="turn";ui.sel=null;S=ns;render();push();toast("New game started");
   },
   cancelNew:()=>{ui.confirmNew=false;render()},
   newroom:()=>goRoom(newRoomCode(),"display"),
+  pickHorde:d=>{ui.setupTouched=true;ui.setup.horde=d.h;ui.setup.start=0;render()},
+  tide:d=>commit(S=>{const t=S.board.find(b=>b.k==="kr_tidal");if(t){t.tide=Math.max(0,(t.tide||0)+(+d.d));if(t.tide>=4)t.tide=0}}),
+  fore:d=>commit(S=>{const o=S.board.find(b=>b.k==="kr_ominous");if(o)o.fore=Math.max(0,(o.fore||0)+(+d.d))}),
+  foreKraken:()=>commit(S=>{const o=S.board.find(b=>b.k==="kr_ominous");if(o&&o.fore>=8){o.fore-=8;addBoard(S,"kr_kraken8",S.level,true);log(S,"Ominous Seas: the Horde creates an 8/8 Kraken");setSpot(S,{kind:"one",k:"kr_kraken8"})}}),
+  sac:()=>{commit(sacrifice);ui.sel=null;render()},
+  regenGy:d=>commit(S=>{const r=S.regen.splice(+d.i,1)[0];if(r){S.gys[r.l].push(r.k);log(S,`${card(r.k).n} loses its Regeneration counter and returns to the graveyard`)}}),
+  regenBf:d=>commit(S=>{const r=S.regen.splice(+d.i,1)[0];if(r){addBoard(S,r.k,r.l,false,{noRegen:true});log(S,`${card(r.k).n} regenerates onto the battlefield`)}}),
+  fixImg:()=>{const k=$("#fixk")?.value;const u=($("#fixu")?.value||"").trim();const m=/scryfall\.com\/card\/([a-z0-9]+)\/([^\/?#]+)/i.exec(u);
+    if(!k||!m){toast("Paste a Scryfall card link, like https://scryfall.com/card/tpca/17/ooze");return}
+    const sf=m[1].toLowerCase()+"/"+m[2];commit(S=>{S.pins=S.pins||{};S.pins[k]=sf;log(S,`Card image for ${card(k).n} set to ${sf}`)});if(META[k])delete META[k].pin;applyPins();toast("Loading that printing from Scryfall")},
   leaveroom:()=>{try{localStorage.removeItem("dungeon-horde-mode")}catch(e){}goRoom("","")},
   refreshMeta:()=>refreshMeta()
 };

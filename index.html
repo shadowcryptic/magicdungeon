@@ -371,7 +371,7 @@ const CY=rows("cy_",[
   [10,"Dalek Drone","c","dalek"],[10,"Dalek Squadron","C","dalek"],[1,"Davros, Dalek Creator","L","dalek"],[1,"Missy","L","cyber"],[1,"The Cyber-Controller","L","cyber"],
   [1,"The Dalek Emperor","L","dalek"],[1,"The Master, Gallifrey's End","L","dalek"],[1,"The Master, Multiplied","L","dalek"],[1,"The Rani","L","dalek"],[1,"The Valeyard","L","dalek"],
   [10,"Blasphemous Act","S","spell"],[15,"Cyber Conversion","S","spell"],[10,"Cybership","A","art","",true,{sf:"who/177"}],[10,"Death in Heaven","S","spell"],[5,"Exterminate!","S","spell"],
-  [100,"Cyberman","T","cyber","2/2",false,{key:"cy_cyberman",tq:['t:token !"Cyberman"']}],
+  [100,"Cyberman","T","cyber","2/2",false,{key:"cy_cyberman",sf:"twho/24",tq:['t:token !"Cyberman"']}],
   [100,"Dalek","T","dalek","3/3",false,{key:"cy_dalek",note:"Menace",tq:['t:token !"Dalek"']}]
 ]);
 const GZ=rows("gz_",[
@@ -401,7 +401,7 @@ const KR_C=rows("kr_",[
   [1,"Serpent of Yawning Depths","C","kraken"],[3,"Denizen of the Deep","C","kraken"],[2,"Inkwell Leviathan","C","kraken"],[2,"Elder Deep-Fiend","C","kraken"],
   [2,"Fleet Swallower","C","kraken"],[1,"Frost Fair Lure Fish","C","kraken"],[1,"Aboleth Spawn","C","kraken"],[17,"Man-o'-War","c","kraken"],[13,"Nadir Kraken","C","kraken"],
   [2,"Reservoir Kraken","C","kraken"],[2,"Shipbreaker Kraken","C","kraken"],[1,"Spawning Kraken","C","kraken"],[12,"Tolarian Kraken","c","kraken"],[4,"Hullbreaker Horror","C","kraken"],
-  [1,"Kederekt Leviathan","C","kraken"],[2,"Stormtide Leviathan","C","kraken"],[2,"Nemesis of Reason","C","kraken"],[4,"Tidal Terror","c","kraken"],[4,"Chasm Skulker","C","kraken"],
+  [1,"Kederekt Leviathan","C","kraken"],[2,"Stormtide Leviathan","C","kraken","",true,{sf:"cmr/407"}],[2,"Nemesis of Reason","C","kraken"],[4,"Tidal Terror","c","kraken"],[4,"Chasm Skulker","C","kraken"],
   [6,"Colossal Whale","C","kraken"],[3,"Reef Worm","C","kraken"],[10,"Rot-Tide Gargantua","c","kraken"],
   [3,"Whelming Wave","S","spell"],[2,"Devastation Tide","S","spell"],[3,"Sunken City","E","ench"]
 ]);
@@ -428,7 +428,7 @@ const BAN_GROUPS=[
   ["Enchantments",["Aether Flash","Aurification","Authority of the Consuls","Barbed Foliage","Blind Obedience","Dueling Grounds","Island Sanctuary","Lethal Vapors","Leyline of Singularity","No Mercy","Pyrohemia","Rest in Peace","Solitary Confinement","Tainted Aether","Teferi's Moat"]],
   ["Instants & sorceries",["Surgical Extraction","Eradicate","Haunting Echoes","Mind Funeral","Time Stretch"]],
   ["Artifacts",["Caltrops","Crawlspace","Ensnaring Bridge","Grindstone","Quietus Spike","Trepanation Blade"]]
-].map(([g,ns])=>[g,ns.map(n=>{const k="ban_"+slug(n);if(!CARDS[k])CARDS[k]=C(n,"art","art","",false,{ban:1});return k})]);
+].map(([g,ns])=>[g,ns.map(n=>{const k="ban_"+slug(n);if(!CARDS[k])CARDS[k]=C(n,"art","art","",false,n==="Stormtide Leviathan"?{ban:1,sf:"cmr/407"}:{ban:1});return k})]);
 const BAN_COMBOS=[["Midnight Guard","Elemental Mastery"],["Exquisite Blood","Sanguine Bond"]];
 for(const k in CARDS)CARDS[k].k=k;
 
@@ -483,12 +483,12 @@ const HORDES={
     tokens:["gz_humansoldier","treasure"],
     rules:["One 300-card library: 8 Titans, 92 support cards and 200 Human Soldier tokens.",
       "Titans use their Godzilla-series versions where they exist."]},
-  kraken:{name:"Kraken Horde",short:"Krakens",col:"var(--t-kraken)",depth:"Horde libraries",win:"The sea is calm",
-    blurb:"Tentacles, Krakens and the tide. Two libraries and two commander enchantments.",
+  kraken:{name:"Kraken Horde",short:"Krakens",col:"var(--t-kraken)",depth:"Horde library",win:"The sea is calm",
+    blurb:"Tentacles, Krakens and the tide, with two commander enchantments.",
     intro:"The tide rises. Survivors take three set-up turns.",
-    decks:[{name:"Legends & Tokens",tag:"Library 1",col:"var(--t-kraken)",list:KR_LT},{name:"Creatures",tag:"Library 2",col:"var(--t-horror)",list:KR_C}],
+    decks:[{name:"The Deep",tag:"Library",col:"var(--t-kraken)",list:KR_LT.concat(KR_C)}],
     start:["kr_tidal","kr_ominous"],tokens:["kr_tentacle","kr_squid","kr_kraken1","kr_kraken8","kr_kraken9","treasure"],flags:{tide:1},
-    rules:["Two libraries, played in order. When one runs out, the other starts on the next Horde turn. The Horde loses when both are empty.",
+    rules:["One combined 305-card library: the Legends & Tokens list and the Creatures list shuffled together.",
       "Tidal Influence and Ominous Seas start on the battlefield as the Horde's commanders. They can't be targeted or removed.",
       "Tidal Influence gets a tide counter at each Horde upkeep. At exactly 1 counter, blue creatures get −2/−0. At exactly 3, blue creatures get +2/+0. At 4, all counters are removed. This affects the Survivors' blue creatures too.",
       "Ominous Seas gets a foreshadow counter whenever the Horde draws a card. Remove 8 to create an 8/8 blue Kraken token.",
@@ -558,7 +558,7 @@ function basePT(S,k){if(S.pt&&S.pt[k]!=null)return S.pt[k];const c=card(k);if(c.
 
 /* ================= SCRYFALL (card images, rarity, P/T, types) ================= */
 // Images load from Scryfall's CDN in the viewer's browser. Nothing is copied into this repo.
-const META={};const MKEY="dungeon-horde-scryfall-v5";
+const META={};const MKEY="dungeon-horde-scryfall-v6";
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const norm=s=>String(s).toLowerCase().replace(/[’‘]/g,"'").trim();
 const SFH={"Accept":"application/json"};
@@ -585,15 +585,15 @@ async function loadMeta(){
   try{
     const special=k=>CARDS[k].tq||CARDS[k].sf||CARDS[k].gz;
     const named=Object.keys(CARDS).filter(k=>!special(k));
-    const byName={};named.forEach(k=>byName[norm(CARDS[k].q||CARDS[k].n)]=k);
+    const byName={};named.forEach(k=>{const n=norm(CARDS[k].q||CARDS[k].n);(byName[n]=byName[n]||[]).push(k)});
     for(let i=0;i<named.length;i+=75){
       const ids=named.slice(i,i+75).map(k=>({name:CARDS[k].q||CARDS[k].n}));
       const r=await fetch("https://api.scryfall.com/cards/collection",{method:"POST",headers:{...SFH,"Content-Type":"application/json"},body:JSON.stringify({identifiers:ids})});
       if(!r.ok)throw new Error("Scryfall "+r.status);
       const j=await r.json();
-      (j.data||[]).forEach(c=>{const k=byName[norm(c.name)]||byName[norm(c.name.split(" // ")[0])];if(k)META[k]=metaFrom(c,CARDS[k].face)});
+      (j.data||[]).forEach(c=>{const ks=byName[norm(c.name)]||byName[norm(c.name.split(" // ")[0])]||[];ks.forEach(k=>META[k]=metaFrom(c,CARDS[k].face))});
       // Anything the batch couldn't match by name gets one more try on its own
-      for(const nf of (j.not_found||[])){const k=byName[norm(nf.name||"")];if(k){await sleep(110);try{await loadOne(k)}catch(e){}}}
+      for(const nf of (j.not_found||[])){for(const k of (byName[norm(nf.name||"")]||[])){await sleep(110);try{await loadOne(k)}catch(e){}}}
       render();await sleep(120);
     }
     for(const k of Object.keys(CARDS).filter(special)){try{await loadOne(k)}catch(e){}await sleep(110)}
